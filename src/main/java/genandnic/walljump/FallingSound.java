@@ -3,10 +3,12 @@ package genandnic.walljump;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.sound.MovingSoundInstance;
+import net.minecraft.client.sound.*;
 import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.random.Random;
 
 
 @Environment(EnvType.CLIENT)
@@ -15,7 +17,7 @@ public class FallingSound extends MovingSoundInstance {
     private final ClientPlayerEntity player;
 
     public FallingSound(ClientPlayerEntity player) {
-        super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS);
+        super(SoundEvents.ITEM_ELYTRA_FLYING, SoundCategory.PLAYERS, SoundInstance.createRandom());
         this.player = player;
         this.repeat = true;
         this.repeatDelay = 0;

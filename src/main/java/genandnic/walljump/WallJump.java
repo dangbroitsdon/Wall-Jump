@@ -11,13 +11,10 @@ public class WallJump implements ModInitializer {
 		WallJumpConfig.registerConfig();
 
 		// Enchantments
-		WallJumpEnchantmentRegistry.registerWallJumpEnchantment();
-		WallJumpEnchantmentRegistry.registerDoubleJumpEnchantment();
-		WallJumpEnchantmentRegistry.registerSpeedBoostEnchantment();
+		WallJumpEnchantmentRegistry.registerEnchantments();
 
 		// Packets
-		WallJumpPacketRegistry.registerFallDistancePacket();
-		WallJumpPacketRegistry.registerWallJumpPacket();
+		WallJumpPacketRegistry.registerPackets();
 
 		Constants.LOGGER.info("[Wall Jump] initialized!");
 	}

@@ -15,23 +15,7 @@ public class WallJumpEnchantmentRegistry {
     public static Enchantment DOUBLEJUMP_ENCHANTMENT;
     public static Enchantment SPEEDBOOST_ENCHANTMENT;
 
-    public static void registerWallJumpEnchantment() {
-        if (!WallJumpConfig.getConfig().useWallJump && WallJumpConfig.getConfig().enableWallJumpEnchantment) {
-            WALLJUMP_ENCHANTMENT = Registry.register(
-                    Registry.ENCHANTMENT,
-                    new Identifier("walljump", "walljump"),
-                    new WallJumpEnchantment(
-                            Enchantment.Rarity.UNCOMMON,
-                            EnchantmentTarget.ARMOR_FEET,
-                            new EquipmentSlot[] {
-                                    EquipmentSlot.FEET
-                            }
-                    )
-            );
-        }
-    }
-
-    public static void registerDoubleJumpEnchantment() {
+    public static void registerEnchantments() {
         if (!WallJumpConfig.getConfig().useDoubleJump && WallJumpConfig.getConfig().enableDoubleJumpEnchantment) {
             DOUBLEJUMP_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
@@ -45,9 +29,6 @@ public class WallJumpEnchantmentRegistry {
                     )
             );
         }
-    }
-
-    public static void registerSpeedBoostEnchantment() {
         if (WallJumpConfig.getConfig().sprintSpeedBoost == 0.0 && WallJumpConfig.getConfig().enableSpeedBoostEnchantment) {
             SPEEDBOOST_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
@@ -61,5 +42,19 @@ public class WallJumpEnchantmentRegistry {
                     )
             );
         }
+        if (!WallJumpConfig.getConfig().useWallJump && WallJumpConfig.getConfig().enableWallJumpEnchantment) {
+            WALLJUMP_ENCHANTMENT = Registry.register(
+                    Registry.ENCHANTMENT,
+                    new Identifier("walljump", "walljump"),
+                    new WallJumpEnchantment(
+                            Enchantment.Rarity.UNCOMMON,
+                            EnchantmentTarget.ARMOR_FEET,
+                            new EquipmentSlot[] {
+                                    EquipmentSlot.FEET
+                            }
+                    )
+            );
+        }
+
     }
 }

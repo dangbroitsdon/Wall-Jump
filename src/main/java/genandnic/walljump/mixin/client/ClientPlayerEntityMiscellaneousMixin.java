@@ -7,6 +7,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.network.encryption.PlayerPublicKey;
+import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -17,9 +19,7 @@ import genandnic.walljump.WallJumpClient;
 @Mixin(ClientPlayerEntity.class)
 public class ClientPlayerEntityMiscellaneousMixin extends AbstractClientPlayerEntity {
 
-    public ClientPlayerEntityMiscellaneousMixin(ClientWorld world, GameProfile profile) {
-        super(world, profile);
-    }
+    public ClientPlayerEntityMiscellaneousMixin(ClientWorld world, GameProfile profile, @Nullable PlayerPublicKey publicKey) { super(world, profile, publicKey); }
 
     @Inject(method = "tickMovement", at = @At("TAIL"))
     private void miscellaneousTickMovement(CallbackInfo ci) {
