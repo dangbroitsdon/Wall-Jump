@@ -16,8 +16,8 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Map;
 
 public class SpeedBoostLogic {
-    public static ClientPlayerEntity pl = MinecraftClient.getInstance().player;
     public static void doSpeedBoost() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         StatusEffectInstance jumpBoostEffect = pl.getStatusEffect(StatusEffects.JUMP_BOOST);
 
         int jumpBoostLevel = 0;
@@ -60,6 +60,7 @@ public class SpeedBoostLogic {
         }
     }
     private static int getEquipmentBoost(EquipmentSlot slot) {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         ItemStack stack = pl.getEquippedStack(slot);
         if (!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(stack);

@@ -36,9 +36,9 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
     private static double lastJumpY = Double.MAX_VALUE;
     private static Set<Direction> walls = new HashSet<>();
     private static Set<Direction> staleWalls = new HashSet<>();
-    private static ClientPlayerEntity pl = MinecraftClient.getInstance().player;
 
     public static void doWallJump() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         if(!canWallJump()) return;
 
         if(getConfig().classicWallJump) {
@@ -158,6 +158,7 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
     }
 
     private static void updateWalls() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         Box box = new Box(
                 pl.getX() - 0.001,
                 pl.getY(),
@@ -191,6 +192,7 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
     }
 
     private static boolean canWallJump() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         if (getConfig().useWallJump) return true;
 
         ItemStack stack = pl.getEquippedStack(EquipmentSlot.FEET);
@@ -203,7 +205,7 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
 
 
     private static void wallJump(float up) {
-
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         float strafe = Math.signum(pl.sidewaysSpeed) * up * up;
         float forward = Math.signum(pl.forwardSpeed) * up * up;
 
@@ -231,7 +233,7 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
     }
 
     private static void spawnWallParticle(BlockPos blockPos) {
-
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         BlockState blockState = pl.world.getBlockState(blockPos);
         if(blockState.getRenderType() != BlockRenderType.INVISIBLE) {
 
@@ -255,25 +257,27 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
     }
 
     private static BlockPos getWallPos() {
-
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         BlockPos clingPos = pl.getBlockPos().offset(getClingDirection());
         return pl.world.getBlockState(clingPos).getMaterial().isSolid() ? clingPos : clingPos.offset(Direction.UP);
     }
 
     private static void playBreakSound(BlockPos blockPos) {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         BlockState blockState = pl.world.getBlockState(blockPos);
         BlockSoundGroup soundType = blockState.getBlock().getSoundGroup(blockState);
         pl.playSound(soundType.getFallSound(), soundType.getVolume() * 0.5F, soundType.getPitch());
     }
 
     private static void playHitSound(BlockPos blockPos) {
-
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         BlockState blockState = pl.world.getBlockState(blockPos);
         BlockSoundGroup soundType = blockState.getBlock().getSoundGroup(blockState);
         pl.playSound(soundType.getHitSound(), soundType.getVolume() * 0.25F, soundType.getPitch());
     }
 
     private static boolean canWallCling() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         if(pl.isClimbing() || pl.getVelocity().getY() > 0.1 || pl.getHungerManager().getFoodLevel() < 1)
             return false;
 
@@ -291,6 +295,7 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
     }
 
     private static boolean getClassicWallJump() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         return getConfig().classicWallJump ? !pl.input.sneaking : !WallJumpKeyBindingRegistry.toggleWallJump;
     }
 }

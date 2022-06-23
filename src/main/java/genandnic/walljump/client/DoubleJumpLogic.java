@@ -21,9 +21,9 @@ import static genandnic.walljump.WallJumpConfig.getConfig;
 public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
     private static int jumpCount = 0;
     private static boolean jumpKey = false;
-    public static ClientPlayerEntity pl = MinecraftClient.getInstance().player;
 
     public static void doDoubleJump() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         Vec3d pos = pl.getPos();
         Vec3d motion = pl.getVelocity();
 
@@ -71,6 +71,7 @@ public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
     }
 
     private static int getMultiJumps() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         int jumpCount = 0;
         if(getConfig().useDoubleJump)
             jumpCount += 1;

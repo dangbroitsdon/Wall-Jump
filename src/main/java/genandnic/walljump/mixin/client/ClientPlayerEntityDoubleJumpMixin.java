@@ -9,9 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import static genandnic.walljump.client.DoubleJumpLogic.doDoubleJump;
 
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityDoubleJumpMixin {
+public abstract class ClientPlayerEntityDoubleJumpMixin{
     @Inject(method = "tickMovement", at = @At("TAIL"))
-    private void doubleJumpTickMovement(CallbackInfo ci) {
-        doDoubleJump();
-    }
+    private void doubleJumpTickMovement(CallbackInfo ci) {doDoubleJump();}
 }

@@ -10,7 +10,7 @@ import static genandnic.walljump.client.MiscLogic.fallSound;
 import static genandnic.walljump.client.MiscLogic.stepAssist;
 
 @Mixin(ClientPlayerEntity.class)
-public class ClientPlayerEntityMiscellaneousMixin {
+public class ClientPlayerEntityMiscellaneousMixin{
     @Inject(method = "tickMovement", at = @At("TAIL"))
     private void miscellaneousTickMovement(CallbackInfo ci) {
         stepAssist();

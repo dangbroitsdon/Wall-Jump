@@ -8,8 +8,8 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import static genandnic.walljump.WallJumpConfig.getConfig;
 
 public class MiscLogic {
-    public static ClientPlayerEntity pl = MinecraftClient.getInstance().player;
     public static void stepAssist() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         if(pl.horizontalCollision
                 && getConfig().stepAssist
                 && pl.getVelocity().getY() > -0.2
@@ -25,6 +25,7 @@ public class MiscLogic {
     }
 
     public static void playFallSound() {
+        ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         if(pl.fallDistance > 1.5 && !pl.isFallFlying()) {
 
             if(getConfig().playFallSound && WallJumpClient.FALLING_SOUND.isDone()) {
