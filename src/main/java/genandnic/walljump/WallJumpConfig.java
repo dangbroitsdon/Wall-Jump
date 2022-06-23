@@ -8,7 +8,9 @@ import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
-@Config(name = Constants.MOD_ID)
+import static genandnic.walljump.Constants.MOD_ID;
+
+@Config(name = MOD_ID)
 public class WallJumpConfig implements ConfigData {
         public static ConfigHolder<WallJumpConfig> config;
 

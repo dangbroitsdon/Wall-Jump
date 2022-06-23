@@ -9,4 +9,5 @@ public final class Constants {
     public static final String MOD_ID = "walljump";
     public static final Identifier FALL_DISTANCE_PACKET_ID = new Identifier("walljump", "falldistance");
     public static final Identifier WALL_JUMP_PACKET_ID = new Identifier("walljump", "walljump");
+
 }
