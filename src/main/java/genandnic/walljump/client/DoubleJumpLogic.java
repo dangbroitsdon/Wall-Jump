@@ -1,5 +1,6 @@
 package genandnic.walljump.client;
 
+import genandnic.walljump.WallJumpConfig;
 import genandnic.walljump.registry.WallJumpEnchantmentRegistry;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
@@ -16,7 +17,6 @@ import net.minecraft.util.math.Vec3d;
 import java.util.Map;
 
 import static genandnic.walljump.Constants.FALL_DISTANCE_PACKET_ID;
-import static genandnic.walljump.WallJumpConfig.getConfig;
 
 public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
     private static int jumpCount = 0;
@@ -73,7 +73,7 @@ public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
     private static int getMultiJumps() {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
         int jumpCount = 0;
-        if(getConfig().useDoubleJump)
+        if(WallJumpConfig.getConfig().useDoubleJump)
             jumpCount += 1;
 
         ItemStack stack = pl.getEquippedStack(EquipmentSlot.FEET);

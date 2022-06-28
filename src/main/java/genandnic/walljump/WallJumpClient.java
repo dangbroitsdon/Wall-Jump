@@ -1,12 +1,11 @@
 package genandnic.walljump;
 
+import genandnic.walljump.registry.WallJumpKeyBindingRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
 
-import static genandnic.walljump.registry.WallJumpKeyBindingRegistry.registerClientEndTickEvents;
-import static genandnic.walljump.registry.WallJumpKeyBindingRegistry.registerKeyBinding;
 import static genandnic.walljump.Constants.LOGGER;
 
 @Environment(EnvType.CLIENT)
@@ -16,8 +15,8 @@ public class WallJumpClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		//KeyBinding Setup
-		registerKeyBinding();
-		registerClientEndTickEvents();
+		WallJumpKeyBindingRegistry.registerKeyBinding();
+		WallJumpKeyBindingRegistry.registerClientEndTickEvents();
 
 		//Fall Sound lol
 		FALLING_SOUND = new FallingSound(MinecraftClient.getInstance().player);

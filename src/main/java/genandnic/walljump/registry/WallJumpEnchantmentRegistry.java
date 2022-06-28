@@ -1,5 +1,6 @@
 package genandnic.walljump.registry;
 
+import genandnic.walljump.WallJumpConfig;
 import genandnic.walljump.enchantment.DoubleJumpEnchantment;
 import genandnic.walljump.enchantment.SpeedBoostEnchantment;
 import genandnic.walljump.enchantment.WallJumpEnchantment;
@@ -9,15 +10,13 @@ import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static genandnic.walljump.WallJumpConfig.getConfig;
-
 public class WallJumpEnchantmentRegistry {
     public static Enchantment WALLJUMP_ENCHANTMENT;
     public static Enchantment DOUBLEJUMP_ENCHANTMENT;
     public static Enchantment SPEEDBOOST_ENCHANTMENT;
 
     public static void registerEnchantments() {
-        if (!getConfig().useDoubleJump && getConfig().enableDoubleJumpEnchantment) {
+        if (!WallJumpConfig.getConfig().useDoubleJump && WallJumpConfig.getConfig().enableDoubleJumpEnchantment) {
             DOUBLEJUMP_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
                     new Identifier("walljump", "doublejump"),
@@ -30,7 +29,7 @@ public class WallJumpEnchantmentRegistry {
                     )
             );
         }
-        if (getConfig().sprintSpeedBoost == 0.0 && getConfig().enableSpeedBoostEnchantment) {
+        if (WallJumpConfig.getConfig().sprintSpeedBoost == 0.0 && WallJumpConfig.getConfig().enableSpeedBoostEnchantment) {
             SPEEDBOOST_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
                     new Identifier("walljump", "speedboost"),
@@ -43,7 +42,7 @@ public class WallJumpEnchantmentRegistry {
                     )
             );
         }
-        if (!getConfig().useWallJump && getConfig().enableWallJumpEnchantment) {
+        if (!WallJumpConfig.getConfig().useWallJump && WallJumpConfig.getConfig().enableWallJumpEnchantment) {
             WALLJUMP_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
                     new Identifier("walljump", "walljump"),
