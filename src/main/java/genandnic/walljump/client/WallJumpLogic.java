@@ -1,6 +1,6 @@
 package genandnic.walljump.client;
 
-import genandnic.walljump.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpConfigRegistry;
 import genandnic.walljump.registry.WallJumpEnchantmentRegistry;
 import genandnic.walljump.registry.WallJumpKeyBindingRegistry;
 import io.netty.buffer.Unpooled;
@@ -29,8 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
-    public static int ticksWallClinged;
-    private static int ticksKeyDown;
+    private static int ticksWallClinged;
     private static double clingX;
     private static double clingZ;
     private static double lastJumpY = Double.MAX_VALUE;
@@ -39,11 +38,14 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
 
     public static void doWallJump() {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
+        int ticksKeyDown = 0;
+
+
         if(!canWallJump()) return;
 
-        if(WallJumpConfig.getConfig().classicWallJump) {
+        if(WallJumpConfigRegistry.getConfig().classicWallJump) {
             ticksKeyDown = pl.input.sneaking ? ticksKeyDown + 1 : 0;
-        } else if (!WallJumpConfig.getConfig().classicWallJump) {
+        } else if (!WallJumpConfigRegistry.getConfig().classicWallJump) {
             ticksKeyDown = WallJumpKeyBindingRegistry.toggleWallJump ? ticksKeyDown + 1 : 0;
         }
 
@@ -65,16 +67,13 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
 
         if(ticksWallClinged < 1) {
 
-            if (ticksKeyDown > 0
-                    && ticksKeyDown < 4
-                    && !walls.isEmpty()
-                    && canWallCling()
+            if (ticksKeyDown > 0 && !walls.isEmpty() && canWallCling()
             ) {
 
                 pl.limbDistance = 2.5F;
                 pl.lastLimbDistance = 2.5F;
 
-                if (WallJumpConfig.getConfig().autoRotation) {
+                if (WallJumpConfigRegistry.getConfig().autoRotation) {
                     pl.setYaw(getClingDirection().getOpposite().asRotation());
                     pl.prevYaw = pl.getYaw();
                 }
@@ -110,14 +109,14 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
                 passedData.writeBoolean(true);
                 ClientPlayNetworking.send(WALL_JUMP_PACKET_ID, passedData);
 
-                wallJump((float) WallJumpConfig.getConfig().wallJumpHeight);
+                wallJump((float) WallJumpConfigRegistry.getConfig().wallJumpHeight);
                 staleWalls = new HashSet<>(walls);
             }
 
             return;
         }
 
-        if(WallJumpConfig.getConfig().autoRotation) {
+        if(WallJumpConfigRegistry.getConfig().autoRotation) {
             pl.setYaw(getClingDirection().getOpposite().asRotation());
             pl.prevYaw = pl.getYaw();
         }
@@ -135,7 +134,7 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
             motionY = motionY + 0.2;
             spawnWallParticle(getWallPos());
 
-        } else if(ticksWallClinged++ > WallJumpConfig.getConfig().wallSlideDelay) {
+        } else if(ticksWallClinged++ > WallJumpConfigRegistry.getConfig().wallSlideDelay) {
 
             motionY = -0.1;
             spawnWallParticle(getWallPos());
@@ -193,7 +192,7 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
 
     private static boolean canWallJump() {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
-        if (WallJumpConfig.getConfig().useWallJump) return true;
+        if (WallJumpConfigRegistry.getConfig().useWallJump) return true;
 
         ItemStack stack = pl.getEquippedStack(EquipmentSlot.FEET);
         if(!stack.isEmpty()) {
@@ -282,13 +281,13 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
             return false;
 
         if(pl.isFallFlying()) {
-            return WallJumpConfig.getConfig().enableElytraWallCling;
+            return WallJumpConfigRegistry.getConfig().enableElytraWallCling;
         }
 
         if(!pl.world.isSpaceEmpty(pl.getBoundingBox().offset(0, -0.8, 0)))
             return false;
 
-        if(WallJumpConfig.getConfig().allowReclinging || pl.getY() < lastJumpY - 1)
+        if(WallJumpConfigRegistry.getConfig().allowReclinging || pl.getY() < lastJumpY - 1)
             return true;
 
         return !staleWalls.containsAll(walls);
@@ -296,6 +295,6 @@ public class WallJumpLogic implements ClientPlayerEntityWallJumpInterface {
 
     private static boolean getClassicWallJump() {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
-        return WallJumpConfig.getConfig().classicWallJump ? !pl.input.sneaking : !WallJumpKeyBindingRegistry.toggleWallJump;
+        return WallJumpConfigRegistry.getConfig().classicWallJump ? !pl.input.sneaking : !WallJumpKeyBindingRegistry.toggleWallJump;
     }
 }

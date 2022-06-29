@@ -16,7 +16,6 @@ public class WallJumpClient implements ClientModInitializer {
 	public void onInitializeClient() {
 		//KeyBinding Setup
 		WallJumpKeyBindingRegistry.registerKeyBinding();
-		WallJumpKeyBindingRegistry.registerClientEndTickEvents();
 
 		//Fall Sound lol
 		FALLING_SOUND = new FallingSound(MinecraftClient.getInstance().player);

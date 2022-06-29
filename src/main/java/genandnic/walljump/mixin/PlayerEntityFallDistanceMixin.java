@@ -1,6 +1,6 @@
 package genandnic.walljump.mixin;
 
-import genandnic.walljump.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpConfigRegistry;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
@@ -17,7 +17,7 @@ public abstract class PlayerEntityFallDistanceMixin {
 
     @ModifyArg(method = "handleFallDamage", at = @At(value = "INVOKE", target = "net/minecraft/entity/LivingEntity.handleFallDamage (FFLnet/minecraft/entity/damage/DamageSource;)Z"), index = 0)
     private float adjustFallDistance(float value) {
-        if (value > 3 && value <= WallJumpConfig.getConfig().minFallDistance) {
+        if (value > 3 && value <= WallJumpConfigRegistry.getConfig().minFallDistance) {
             this.playSound(SoundEvents.ENTITY_GENERIC_SMALL_FALL, 0.5F, 1.0F);
             return 3.0F;
         }

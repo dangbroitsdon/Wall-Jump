@@ -1,6 +1,5 @@
 package genandnic.walljump.registry;
 
-import genandnic.walljump.WallJumpConfig;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 
 import static genandnic.walljump.Constants.FALL_DISTANCE_PACKET_ID;
@@ -20,7 +19,7 @@ public class WallJumpPacketRegistry {
 
             server.execute(() -> {
                 if(didWallJump)
-                    player.addExhaustion((float) WallJumpConfig.getConfig().exhaustionWallJump);
+                    player.addExhaustion((float) WallJumpConfigRegistry.getConfig().exhaustionWallJump);
             });
         });
     }

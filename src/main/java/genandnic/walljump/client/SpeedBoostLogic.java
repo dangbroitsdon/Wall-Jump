@@ -1,6 +1,6 @@
 package genandnic.walljump.client;
 
-import genandnic.walljump.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpConfigRegistry;
 import genandnic.walljump.registry.WallJumpEnchantmentRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -39,7 +39,7 @@ public class SpeedBoostLogic {
 
             } else if (pl.isSprinting()) {
 
-                float elytraSpeedBoost = (float) WallJumpConfig.getConfig().elytraSpeedBoost + (getEquipmentBoost(EquipmentSlot.CHEST) * 0.75F);
+                float elytraSpeedBoost = (float) WallJumpConfigRegistry.getConfig().elytraSpeedBoost + (getEquipmentBoost(EquipmentSlot.CHEST) * 0.75F);
                 Vec3d boost = new Vec3d(look.getX(), look.getY() + 0.5, look.getZ()).normalize().multiply(elytraSpeedBoost);
                 if(motion.length() <= boost.length())
                     pl.setVelocity(motion.add(boost.multiply(0.05)));
@@ -51,7 +51,7 @@ public class SpeedBoostLogic {
 
         } else if(pl.isSprinting()) {
 
-            float sprintSpeedBoost = (float) WallJumpConfig.getConfig().sprintSpeedBoost + (getEquipmentBoost(EquipmentSlot.FEET) * 0.375F);
+            float sprintSpeedBoost = (float) WallJumpConfigRegistry.getConfig().sprintSpeedBoost + (getEquipmentBoost(EquipmentSlot.FEET) * 0.375F);
             if(!pl.isOnGround())
                 sprintSpeedBoost /= 3.125;
 

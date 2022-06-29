@@ -20,5 +20,6 @@
   "text.autoconfig.walljump.option.wallSlideDelay": "Wall Slide Delay",
   "text.autoconfig.walljump.option.enableSpeedBoostEnchantment": "Enable Speed Boost Enchantment",
   "text.autoconfig.walljump.option.enableDoubleJumpEnchantment": "Enable Double Jump Enchantment",
-  "text.autoconfig.walljump.option.enableWallJumpEnchantment": "Enable Wall Jump Enchantment"
+  "text.autoconfig.walljump.option.enableWallJumpEnchantment": "Enable Wall Jump Enchantment",
+  "text.autoconfig.walljump.title": "Wall Jump! Config"
 }

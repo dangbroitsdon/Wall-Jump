@@ -1,18 +1,15 @@
 package genandnic.walljump;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 
 import static genandnic.walljump.Constants.MOD_ID;
 
 @Config(name = MOD_ID)
 public class WallJumpConfig implements ConfigData {
-        public static ConfigHolder<WallJumpConfig> config;
+
 
         @Comment("Classic Wall Jump which allows Crouch, the reason this can't be keybinded is because Fabric doesn't support Multi Mapping.")
         @ConfigEntry.Gui.RequiresRestart
@@ -74,14 +71,7 @@ public class WallJumpConfig implements ConfigData {
         @Comment("Ticks wall clinged before starting wall slide.")
         public int wallSlideDelay = 20;
 
-        public static WallJumpConfig getConfig() {
-                return config.getConfig();
-        }
 
-        public static void registerConfig() {
-                AutoConfig.register(WallJumpConfig.class, JanksonConfigSerializer::new);
-                config = AutoConfig.getConfigHolder(WallJumpConfig.class);
-        }
 }
 
 

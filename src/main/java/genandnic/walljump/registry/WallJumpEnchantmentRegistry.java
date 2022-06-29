@@ -1,6 +1,5 @@
 package genandnic.walljump.registry;
 
-import genandnic.walljump.WallJumpConfig;
 import genandnic.walljump.enchantment.DoubleJumpEnchantment;
 import genandnic.walljump.enchantment.SpeedBoostEnchantment;
 import genandnic.walljump.enchantment.WallJumpEnchantment;
@@ -16,7 +15,7 @@ public class WallJumpEnchantmentRegistry {
     public static Enchantment SPEEDBOOST_ENCHANTMENT;
 
     public static void registerEnchantments() {
-        if (!WallJumpConfig.getConfig().useDoubleJump && WallJumpConfig.getConfig().enableDoubleJumpEnchantment) {
+        if (!WallJumpConfigRegistry.getConfig().useDoubleJump && WallJumpConfigRegistry.getConfig().enableDoubleJumpEnchantment) {
             DOUBLEJUMP_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
                     new Identifier("walljump", "doublejump"),
@@ -29,7 +28,7 @@ public class WallJumpEnchantmentRegistry {
                     )
             );
         }
-        if (WallJumpConfig.getConfig().sprintSpeedBoost == 0.0 && WallJumpConfig.getConfig().enableSpeedBoostEnchantment) {
+        if (WallJumpConfigRegistry.getConfig().sprintSpeedBoost == 0.0 && WallJumpConfigRegistry.getConfig().enableSpeedBoostEnchantment) {
             SPEEDBOOST_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
                     new Identifier("walljump", "speedboost"),
@@ -42,7 +41,7 @@ public class WallJumpEnchantmentRegistry {
                     )
             );
         }
-        if (!WallJumpConfig.getConfig().useWallJump && WallJumpConfig.getConfig().enableWallJumpEnchantment) {
+        if (!WallJumpConfigRegistry.getConfig().useWallJump && WallJumpConfigRegistry.getConfig().enableWallJumpEnchantment) {
             WALLJUMP_ENCHANTMENT = Registry.register(
                     Registry.ENCHANTMENT,
                     new Identifier("walljump", "walljump"),
