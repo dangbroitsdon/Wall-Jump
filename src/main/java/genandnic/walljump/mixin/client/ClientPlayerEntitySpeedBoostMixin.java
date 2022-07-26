@@ -45,7 +45,7 @@ public abstract class ClientPlayerEntitySpeedBoostMixin extends AbstractClientPl
         if(jumpBoostEffect != null)
             jumpBoostLevel = jumpBoostEffect.getAmplifier() + 1;
 
-        this.getAbilities().setFlySpeed((float) (this.getMovementSpeed() * (this.isSprinting() ? 1 : 1.3) / 5) * (jumpBoostLevel * 0.5F + 1));
+        this.airStrafingSpeed = (float) (this.getMovementSpeed() * (this.isSprinting() ? 1 : 1.3) / 5) * (jumpBoostLevel * 0.5F + 1);
 
         Vec3d pos = this.getPos();
         Vec3d look = this.getRotationVector();
