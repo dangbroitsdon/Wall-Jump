@@ -28,7 +28,7 @@ public class SpeedBoostLogic {
         Vec3d look = pl.getRotationVector();
         Vec3d motion = pl.getVelocity();
 
-        pl.getAbilities().setFlySpeed((float) (pl.getMovementSpeed() * (pl.isSprinting() ? 1 : 1.3) / 5) * (jumpBoostLevel * 0.5F + 1));
+        pl.airStrafingSpeed = (float) (pl.getMovementSpeed() * (pl.isSprinting() ? 1 : 1.3) / 5) * (jumpBoostLevel * 0.5F + 1);
 
         if (pl.isFallFlying()) {
 
