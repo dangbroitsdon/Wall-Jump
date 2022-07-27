@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ClientWorld.class)
-public class ClientWorldFallingSoundMixin {
+public class MixinClientWorld {
 
     @Inject(method = "addPlayer", at = @At(value = "TAIL"))
     private void addPlayerFallingSound(int id, AbstractClientPlayerEntity player, CallbackInfo ci) {

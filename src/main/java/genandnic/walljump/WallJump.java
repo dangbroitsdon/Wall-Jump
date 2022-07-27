@@ -19,6 +19,6 @@ public class WallJump implements ModInitializer {
 		// Packets Registry
 		WallJumpPacketRegistry.registerPackets();
 
-		LOGGER.info("[Wall Jump] initialized!");
+		LOGGER.info("[Wall-Jump! UNOFFICIAL [FABRIC]] initialized!");
 	}
 }

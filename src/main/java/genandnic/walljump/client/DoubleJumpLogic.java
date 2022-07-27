@@ -16,7 +16,7 @@ import net.minecraft.util.math.Vec3d;
 
 import java.util.Map;
 
-import static genandnic.walljump.Constants.FALL_DISTANCE_PACKET_ID;
+import static genandnic.walljump.Constants.*;
 
 public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
     private static int jumpCount = 0;
@@ -24,6 +24,8 @@ public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
 
     public static void doDoubleJump() {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
+        assert pl != null;
+
         Vec3d pos = pl.getPos();
         Vec3d motion = pl.getVelocity();
 
@@ -42,7 +44,7 @@ public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
                 || pl.isRiding()
                 || pl.getAbilities().allowFlying
         ) {
-            jumpCount = getMultiJumps();
+            jumpCount = getJumpCount();
         }
 
         else if(pl.input.jumping)
@@ -54,13 +56,18 @@ public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
                     && pl.getHungerManager().getFoodLevel() > 0
             ){
                 pl.jump();
+
+                PacketByteBuf djBuf = new PacketByteBuf(Unpooled.buffer());
+                djBuf.writeBoolean(true);
+                ClientPlayNetworking.send(DOUBLE_JUMP_PACKET_ID, djBuf);
+
                 jumpCount--;
 
                 pl.fallDistance = 0.0F;
 
-                PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
-                passedData.writeFloat(pl.fallDistance);
-                ClientPlayNetworking.send(FALL_DISTANCE_PACKET_ID, passedData);
+                PacketByteBuf fdBuf = new PacketByteBuf(Unpooled.buffer());
+                fdBuf.writeFloat(pl.fallDistance);
+                ClientPlayNetworking.send(FALL_DISTANCE_PACKET_ID, fdBuf);
             }
             jumpKey = true;
         }
@@ -70,8 +77,10 @@ public class DoubleJumpLogic implements ClientPlayerEntityWallJumpInterface {
         }
     }
 
-    private static int getMultiJumps() {
+    private static int getJumpCount() {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
+        assert pl != null;
+
         int jumpCount = 0;
         if(WallJumpConfigRegistry.getConfig().useDoubleJump)
             jumpCount += 1;

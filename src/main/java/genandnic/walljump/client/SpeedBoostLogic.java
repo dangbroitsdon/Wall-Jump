@@ -18,6 +18,8 @@ import java.util.Map;
 public class SpeedBoostLogic {
     public static void doSpeedBoost() {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
+        assert pl != null;
+
         StatusEffectInstance jumpBoostEffect = pl.getStatusEffect(StatusEffects.JUMP_BOOST);
 
         int jumpBoostLevel = 0;
@@ -45,7 +47,7 @@ public class SpeedBoostLogic {
                     pl.setVelocity(motion.add(boost.multiply(0.05)));
 
                 if(boost.length() > 0.5)
-                    pl.world.addParticle(ParticleTypes.FIREWORK, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
+                    pl.world.addImportantParticle(ParticleTypes.FIREWORK, pos.getX(), pos.getY(), pos.getZ(), 0, 0, 0);
 
             }
 
@@ -61,6 +63,8 @@ public class SpeedBoostLogic {
     }
     private static int getEquipmentBoost(EquipmentSlot slot) {
         ClientPlayerEntity pl = MinecraftClient.getInstance().player;
+        assert pl != null;
+
         ItemStack stack = pl.getEquippedStack(slot);
         if (!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.get(stack);

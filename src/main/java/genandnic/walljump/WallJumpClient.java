@@ -20,6 +20,6 @@ public class WallJumpClient implements ClientModInitializer {
 		//Fall Sound lol
 		FALLING_SOUND = new FallingSound(MinecraftClient.getInstance().player);
 
-		LOGGER.info("[Wall Jump Client] initialized!");
+		LOGGER.info("[Wall-Jump! UNOFFICIAL [FABRIC] Client] initialized!");
 	}
 }

@@ -9,6 +9,8 @@ import org.lwjgl.glfw.GLFW;
 public class WallJumpKeyBindingRegistry {
     public static KeyBinding WallJumpKeyBinding;
     public static boolean toggleWallJump;
+    public static KeyBinding SlideKeyBinding;
+    public static boolean toggleSlide;
 
     public static void registerKeyBinding() {
         if (WallJumpConfigRegistry.getConfig().useWallJump && !WallJumpConfigRegistry.getConfig().classicWallJump) {

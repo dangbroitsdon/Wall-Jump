@@ -10,8 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
 @Mixin(PlayerEntity.class)
-public abstract class PlayerEntityFallDistanceMixin {
-
+public abstract class MixinPlayerEntity {
     @Shadow
     public abstract void playSound(SoundEvent sound, float volume, float pitch);
 

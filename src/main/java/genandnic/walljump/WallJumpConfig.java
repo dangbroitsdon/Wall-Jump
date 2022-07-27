@@ -4,12 +4,21 @@ import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+import net.minecraft.block.Block;
+import net.minecraft.block.Blocks;
+
+import javax.print.DocFlavor;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static genandnic.walljump.Constants.MOD_ID;
 
 @Config(name = MOD_ID)
 public class WallJumpConfig implements ConfigData {
-
+        @Comment("Blacklists block inputted; can't Wall Jump off it, format (name => SPRUCE_LOG or SAND)")
+        public Set<String> blockBlacklist = new HashSet<>();
 
         @Comment("Classic Wall Jump which allows Crouch, the reason this can't be keybinded is because Fabric doesn't support Multi Mapping.")
         @ConfigEntry.Gui.RequiresRestart
@@ -22,7 +31,6 @@ public class WallJumpConfig implements ConfigData {
         public boolean autoRotation = false;
 
         @Comment("Enables Elytra Wall Cling: Clinging to the Wall with Elytra Deployed.")
-        @ConfigEntry.Gui.RequiresRestart
         public boolean enableElytraWallCling = false;
 
         @Comment("Elytra speed boost; set to 0.0 to disable.")
@@ -31,6 +39,9 @@ public class WallJumpConfig implements ConfigData {
 
         @Comment("Exhaustion gained per wall jump.")
         public double exhaustionWallJump = 0.8;
+
+        @Comment("Exhaustion gained per double jump.")
+        public double exhaustionDoubleJump = 1.2;
 
         @Comment("Minimum distance for fall damage; set to 3.0 to disable.")
         public double minFallDistance = 7.5;
