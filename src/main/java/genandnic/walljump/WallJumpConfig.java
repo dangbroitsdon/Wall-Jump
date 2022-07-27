@@ -1,16 +1,17 @@
 package genandnic.walljump;
 
-import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
-import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Config(name = Constants.MOD_ID)
 public class WallJumpConfig implements ConfigData {
-        public static ConfigHolder<WallJumpConfig> config;
+        @Comment("Blacklists block inputted; can't Wall Jump off it, format (name => SPRUCE_LOG or SAND)")
+        public Set<String> blockBlacklist = new HashSet<>();
 
         @Comment("Classic Wall Jump which allows Crouch, the reason this can't be keybinded is because Fabric doesn't support Multi Mapping.")
         @ConfigEntry.Gui.RequiresRestart
@@ -32,6 +33,9 @@ public class WallJumpConfig implements ConfigData {
 
         @Comment("Exhaustion gained per wall jump.")
         public double exhaustionWallJump = 0.8;
+
+        @Comment("Exhaustion gained per double jump.")
+        public double exhaustionDoubleJump = 1.2;
 
         @Comment("Minimum distance for fall damage; set to 3.0 to disable.")
         public double minFallDistance = 7.5;
@@ -71,15 +75,6 @@ public class WallJumpConfig implements ConfigData {
 
         @Comment("Ticks wall clinged before starting wall slide.")
         public int wallSlideDelay = 20;
-
-        public static WallJumpConfig getConfig() {
-                return config.getConfig();
-        }
-
-        public static void registerConfig() {
-                AutoConfig.register(WallJumpConfig.class, JanksonConfigSerializer::new);
-                config = AutoConfig.getConfigHolder(WallJumpConfig.class);
-        }
 }
 
 

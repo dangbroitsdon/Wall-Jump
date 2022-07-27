@@ -1,24 +1,24 @@
 package genandnic.walljump;
 
+import genandnic.walljump.registry.WallJumpConfigRegistry;
 import genandnic.walljump.registry.WallJumpEnchantmentRegistry;
 import genandnic.walljump.registry.WallJumpPacketRegistry;
 import net.fabricmc.api.ModInitializer;
+
+import static genandnic.walljump.Constants.LOGGER;
 
 public class WallJump implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		// Config Initialization
-		WallJumpConfig.registerConfig();
+		WallJumpConfigRegistry.registerConfig();
 
 		// Enchantments
-		WallJumpEnchantmentRegistry.registerWallJumpEnchantment();
-		WallJumpEnchantmentRegistry.registerDoubleJumpEnchantment();
-		WallJumpEnchantmentRegistry.registerSpeedBoostEnchantment();
+		WallJumpEnchantmentRegistry.registerEnchantments();
 
 		// Packets
-		WallJumpPacketRegistry.registerFallDistancePacket();
-		WallJumpPacketRegistry.registerWallJumpPacket();
+		WallJumpPacketRegistry.registerPackets();
 
-		Constants.LOGGER.info("[Wall Jump] initialized!");
+		LOGGER.info("[Wall Jump] initialized!");
 	}
 }

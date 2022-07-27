@@ -1,6 +1,6 @@
 package genandnic.walljump.enchantment;
 
-import genandnic.walljump.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpConfigRegistry;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
@@ -35,7 +35,7 @@ public class WallJumpEnchantment extends Enchantment {
     @Override
     public boolean isAcceptableItem(ItemStack stack) {
 
-        if(WallJumpConfig.getConfig().useWallJump) {
+        if(WallJumpConfigRegistry.getConfig().useWallJump) {
             return false;
         }
 
