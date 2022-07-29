@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "walljump",
   "version": "${version}",
-  "name": "Wall-Jump!",
+  "name": "Wall-Jump! UNOFFICIAL [FABRIC]",
   "description": "Jump from wall to wall!",
   "authors": [
     "Genandnic",
@@ -32,10 +32,10 @@
     "walljump.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.14.6",
+    "fabricloader": ">=0.14.8",
     "fabric": "*",
-    "cloth-config2": ">=7.0.72",
-    "minecraft": "~1.19",
+    "cloth-config2": ">=7.0.73",
+    "minecraft": "~1.19.1",
     "java": ">=17"
   }
 }

@@ -5,8 +5,6 @@ import genandnic.walljump.registry.WallJumpEnchantmentRegistry;
 import genandnic.walljump.registry.WallJumpKeyBindingRegistry;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
