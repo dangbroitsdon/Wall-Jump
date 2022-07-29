@@ -19,7 +19,7 @@ public class WallJumpKeyBindingRegistry {
                     "category.walljump.walljump"
             ));
             ClientTickEvents.END_CLIENT_TICK.register(client -> {
-                toggleWallJump = WallJumpKeyBindingRegistry.WallJumpKeyBinding.isPressed();
+                toggleWallJump = WallJumpKeyBinding.isPressed();
             });
         }
     }
