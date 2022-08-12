@@ -1,0 +1,43 @@
+modLoader = "javafml"
+loaderVersion = "[38,)"
+license = "GNU AGPLv3"
+
+[[mods]]
+modId = "walljump"
+version = "${version}"
+displayName = "Wall-Jump! UNOFFICIAL [FORGE]"
+credits = "Credits to Genandnic for creating Wall-Jump!"
+authors = "dangbroitsdon"
+issueTrackerURL = "https://github.com/dangbroitsdon/Wall-Jump-Unofficial/issues"
+description = '''
+Jump from wall to wall! Wall jump, double jump, speed jump, fence jump, etc.
+'''
+logoFile = "icon.png"
+
+[[dependencies.walljump]]
+modId = "forge"
+mandatory = true
+versionRange = "[37,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.walljump]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.17,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.walljump]]
+modId = "architectury"
+mandatory = true
+versionRange = "[2.10.12,)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.walljump_forge]]
+modId = "cloth_config"
+mandatory = true
+versionRange = "[5.3.63,)"
+ordering = "AFTER"
+side = "BOTH"
