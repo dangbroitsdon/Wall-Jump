@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "walljump-fabric",
+  "version": "${version}",
+  "name": "Wall-Jump! UNOFFICIAL [FABRIC]",
+  "description": "Jump from wall to wall!",
+  "authors": [
+    "Genandnic",
+    "Liquidwarp",
+    "dangbroitsdon"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/wall-jump-unofficial-fabric",
+    "sources": "https://github.com/dangbroitsdon/Wall-Jump-Unofficial"
+  },
+  "license": "GNU AGPLv3",
+  "icon": "assets/walljump/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "genandnic.walljump.fabric.WallJumpFabric"
+    ],
+    "client": [
+      "genandnic.walljump.fabric.WallJumpFabricClient"
+    ],
+    "modmenu": [
+      "genandnic.walljump.fabric.WallJumpModMenu"
+    ]
+  },
+  "mixins": [
+    "walljump-common.mixins.json"
+  ],
+  "depends": {
+    "fabric": "*",
+    "minecraft": ">=1.16",
+    "architectury": ">=1.32.66",
+    "cloth-config2": ">=4.14.64"
+  }
+}
