@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "mixin": [
+    "walljump-common.mixins.json"
+  ],
+  "quilt_loader": {
+    "group": "${group}",
+    "id": "walljump-quilt",
+    "version": "${version}",
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "environment": "*",
+    "metadata": {
+      "name": "Wall-Jump! UNOFFICIAL [QUILT]",
+      "description": "Jump from wall to wall!",
+      "contributors": {
+        "dangbroitsdon": "Owner"
+      },
+      "contact": {
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/wall-jump-unofficial-fabric",
+        "issues": "https://github.com/dangbroitsdon/Wall-Jump-Unofficial/issues",
+        "sources": "https://github.com/dangbroitsdon/Wall-Jump-Unofficial"
+      },
+      "license": "AGPL-3.0-only",
+      "icon": "assets/walljump/icon.png"
+    },
+    "entrypoints": {
+      "init": [
+        "genandnic.walljump.quilt.WallJumpQuilt"
+      ],
+      "client_init": [
+        "genandnic.walljump.quilt.WallJumpQuiltClient"
+      ],
+      "modmenu": [
+        "genandnic.walljump.fabriclike.WallJumpModMenu"
+      ]
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "version": "*"
+      },
+      {
+        "id": "quilt_base",
+        "version": "*"
+      },
+      {
+        "id": "minecraft",
+        "version": ">=1.19"
+      },
+      {
+        "id": "architectury",
+        "version": ">=5.7.28"
+      },
+      {
+        "id": "cloth-config2",
+        "version": ">=7.0.74"
+      }
+    ]
+  }
+}
