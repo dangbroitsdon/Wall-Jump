@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(LocalPlayer.class)
 public class MixinLocalPlayer {
     @Inject(method = "tick", at = @At("TAIL"))
-    private void wju$tickLogic(CallbackInfo ci) {
+    private void wju$tickPlayerLogic(CallbackInfo ci) {
         WallJumpLogic.doWallJump();
         SpeedBoostLogic.doSpeedBoost();
         DoubleJumpLogic.doDoubleJump();

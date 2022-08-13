@@ -10,4 +10,5 @@ public class Constants {
     public static final ResourceLocation WALL_JUMP_PACKET_ID = new ResourceLocation(MOD_ID, "walljump_packet");
     public static final ResourceLocation DOUBLE_JUMP_PACKET_ID = new ResourceLocation(MOD_ID, "doublejump_packet");
     public static final ResourceLocation FALL_DISTANCE_PACKET_ID = new ResourceLocation(MOD_ID, "falldistance_packet");
+    public static final ResourceLocation SERVER_CONFIG_PACKET_ID = new ResourceLocation(MOD_ID, "serverconfig_packet");
 }

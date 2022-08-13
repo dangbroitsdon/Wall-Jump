@@ -2,6 +2,7 @@ package genandnic.walljump.logic;
 
 import genandnic.walljump.util.IWallJumpAccessor;
 import genandnic.walljump.util.registry.ReceiversRegistry;
+import genandnic.walljump.util.registry.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.AABB;
@@ -26,6 +27,8 @@ public class DoubleJumpLogic implements IWallJumpAccessor {
                 pos.y() + pl.getBbHeight(),
                 pos.z()
         );
+
+        if(!WallJumpConfig.isModUsable(pl.getLevel())) return;
 
         if(pl.isOnGround()
                 || pl.level.containsAnyLiquid(box)
