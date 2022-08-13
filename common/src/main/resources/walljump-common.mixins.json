@@ -1,14 +1,15 @@
 {
   "required": true,
   "package": "genandnic.walljump.mixin",
-  "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "client": [
-    "client.MixinLocalPlayer",
-    "client.MixinClientLevel"
+    "client.MixinClientLevel",
+    "client.MixinGui",
+    "client.MixinLocalPlayer"
   ],
   "mixins": [
-    "MixinPlayer"
+    "MixinPlayer",
+    "MixinPlayerList"
   ],
   "injectors": {
     "defaultRequire": 1
