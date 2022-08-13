@@ -35,7 +35,7 @@ versionRange = "[5.7.28,)"
 ordering = "AFTER"
 side = "BOTH"
 
-[[dependencies.walljump_forge]]
+[[dependencies.walljump]]
 modId = "cloth_config"
 mandatory = true
 versionRange = "[7.0.74,)"
