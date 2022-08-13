@@ -51,6 +51,7 @@ public class WallJumpConfigEntries implements ConfigData {
     public boolean enableDoubleJumpEnchantment = false;
 
     @Comment("Changes the Jump Count for Double Jump so you can instead have a Triple Jump or even a Quadruple Jump.")
+    @ConfigEntry.Gui.RequiresRestart
     public int countDoubleJump = 1;
 
     @Comment("Exhaustion gained per double jump.")

@@ -11,7 +11,7 @@ public class WallJump {
     public static void init() {
         WallJumpConfig.registerConfig();
         EnchantmentsRegistry.registerEnchantments();
-        ReceiversRegistry.registerReceivers();
+        ReceiversRegistry.registerServerReceivers();
         LOGGER.info("[Wall-Jump! UNOFFICIAL] is initialized!");
     }
 }

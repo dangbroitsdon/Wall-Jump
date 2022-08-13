@@ -18,6 +18,9 @@ public class SpeedBoostLogic implements IWallJumpAccessor {
         MobEffectInstance jumpBoostEffect = pl.getEffect(MobEffects.JUMP);
 
         int jumpBoostLevel = 0;
+
+        if(!WallJumpConfig.isModUsable(pl.getLevel())) return;
+
         if(jumpBoostEffect != null)
             jumpBoostLevel = jumpBoostEffect.getAmplifier() + 1;
 

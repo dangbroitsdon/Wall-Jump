@@ -1,8 +1,11 @@
 package genandnic.walljump.util.registry.config;
 
+import genandnic.walljump.util.registry.ReceiversRegistry;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.world.level.Level;
 
 public class WallJumpConfig {
     public static ConfigHolder<WallJumpConfigEntries> config;
@@ -16,7 +19,17 @@ public class WallJumpConfig {
         config = AutoConfig.getConfigHolder(WallJumpConfigEntries.class);
     }
 
-    public static void saveConfig() {
-        config.save();
+    public static boolean isModUsable(Level level) {
+        if(level == null) return false;
+
+        if(level.isClientSide) {
+            if(Minecraft.getInstance().hasSingleplayerServer()) {
+                return true;
+            } else {
+                return ReceiversRegistry.serverConfigSynced;
+            }
+        } else {
+            return true;
+        }
     }
 }
