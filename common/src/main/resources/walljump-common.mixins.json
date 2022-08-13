@@ -4,11 +4,13 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "client.MixinLocalPlayer",
-    "client.MixinClientLevel"
+    "client.MixinClientLevel",
+    "client.MixinGui",
+    "client.MixinLocalPlayer"
   ],
   "mixins": [
-    "MixinPlayer"
+    "MixinPlayer",
+    "MixinPlayerList"
   ],
   "injectors": {
     "defaultRequire": 1
