@@ -10,7 +10,7 @@
     "intermediate_mappings": "net.fabricmc:intermediary",
     "environment": "*",
     "metadata": {
-      "name": "Wall-Jump! UNOFFICIAL [QUILT]",
+      "name": "Wall-Jump! UNOFFICIAL",
       "description": "Jump from wall to wall!",
       "contributors": {
         "dangbroitsdon": "Owner"

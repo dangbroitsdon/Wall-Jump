@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "walljump-fabric",
   "version": "${version}",
-  "name": "Wall-Jump! UNOFFICIAL [FABRIC]",
+  "name": "Wall-Jump! UNOFFICIAL",
   "description": "Jump from wall to wall!",
   "authors": [
     "genandnic",

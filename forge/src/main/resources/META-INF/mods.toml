@@ -5,7 +5,7 @@ license = "GNU AGPLv3"
 [[mods]]
 modId = "walljump"
 version = "${version}"
-displayName = "Wall-Jump! UNOFFICIAL [FORGE]"
+displayName = "Wall-Jump! UNOFFICIAL"
 credits = "Credits to genandnic for creating Wall-Jump!"
 authors = "dangbroitsdon"
 issueTrackerURL = "https://github.com/dangbroitsdon/Wall-Jump-Unofficial/issues"
