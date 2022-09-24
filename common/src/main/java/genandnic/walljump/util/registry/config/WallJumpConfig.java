@@ -1,6 +1,6 @@
 package genandnic.walljump.util.registry.config;
 
-import genandnic.walljump.util.registry.ReceiversRegistry;
+import genandnic.walljump.util.registry.WallJumpReceivers;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
@@ -26,7 +26,7 @@ public class WallJumpConfig {
             if(Minecraft.getInstance().hasSingleplayerServer()) {
                 return true;
             } else {
-                return ReceiversRegistry.serverConfigSynced;
+                return WallJumpReceivers.serverConfigSynced;
             }
         } else {
             return true;

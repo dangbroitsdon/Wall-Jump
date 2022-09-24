@@ -1,7 +1,6 @@
 package genandnic.walljump.util.registry;
 
 import dev.architectury.networking.NetworkManager;
-import genandnic.walljump.util.Constants;
 import genandnic.walljump.util.registry.config.WallJumpConfig;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
@@ -12,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.IntFunction;
 
-import static genandnic.walljump.util.Constants.*;
+import static genandnic.walljump.WallJump.*;
 
-public class ReceiversRegistry {
+public class WallJumpReceivers {
     public static boolean serverConfigSynced;
     public static void registerReceivers() {
         NetworkManager.registerReceiver(NetworkManager.c2s(), WALL_JUMP_PACKET_ID, (buf, context) -> {
@@ -41,7 +40,7 @@ public class ReceiversRegistry {
     public static void registerClientReceivers() {
         IntFunction<List<String>> i = (x) -> Collections.singletonList(Integer.toString(x));
 
-        NetworkManager.registerReceiver(NetworkManager.s2c(), Constants.SERVER_CONFIG_PACKET_ID, (buf, context) -> {
+        NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableWallJumpEnchantment = buf.readBoolean();
             if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
@@ -112,7 +111,7 @@ public class ReceiversRegistry {
         packet.writeDouble(WallJumpConfig.getConfigEntries().sprintSpeedBoost);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableSpeedBoostEnchantment);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableStepAssist);
-        NetworkManager.sendToPlayer(pl, Constants.SERVER_CONFIG_PACKET_ID, packet);
+        NetworkManager.sendToPlayer(pl, SERVER_CONFIG_PACKET_ID, packet);
         System.out.println("[Wall-Jump! UNOFFICIAL] Synced Server Config");
     }
 }

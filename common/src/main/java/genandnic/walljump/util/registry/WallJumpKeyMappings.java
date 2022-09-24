@@ -6,7 +6,7 @@ import genandnic.walljump.util.registry.config.WallJumpConfig;
 import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
 
-public class KeyMappingsRegistry {
+public class WallJumpKeyMappings {
     public static boolean toggleWallJump;
     public static KeyMapping KEY_WALLJUMP;
 
