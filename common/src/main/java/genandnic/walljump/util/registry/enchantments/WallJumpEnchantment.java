@@ -9,8 +9,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class WallJumpEnchantment extends Enchantment {
 
-    public WallJumpEnchantment(Enchantment.Rarity weight, EnchantmentCategory category, EquipmentSlot[] slots) {
-        super(weight, category, slots);
+    public WallJumpEnchantment() {
+        super(Enchantment.Rarity.UNCOMMON,
+                EnchantmentCategory.ARMOR_FEET,
+                new EquipmentSlot[] {
+                        EquipmentSlot.FEET
+                });
     }
 
     @Override

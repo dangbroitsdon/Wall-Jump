@@ -1,8 +1,8 @@
 package genandnic.walljump.util;
 
 import genandnic.walljump.logic.WallJumpLogic;
-import genandnic.walljump.util.registry.EnchantmentsRegistry;
-import genandnic.walljump.util.registry.KeyMappingsRegistry;
+import genandnic.walljump.util.registry.WallJumpEnchantments;
+import genandnic.walljump.util.registry.WallJumpKeyMappings;
 import genandnic.walljump.util.registry.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -30,9 +30,9 @@ public interface IWallJumpAccessor {
     // Wall Jump
     static boolean getClassicWallJumpEligibility() {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
-        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? !pl.input.shiftKeyDown : !KeyMappingsRegistry.toggleWallJump;
+
+        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? !pl.input.shiftKeyDown : !WallJumpKeyMappings.toggleWallJump;
     }
 
     static boolean getWallJumpEligibility() {
@@ -44,15 +44,15 @@ public interface IWallJumpAccessor {
         ItemStack stack = pl.getItemBySlot(EquipmentSlot.FEET);
         if(!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-            return enchantments.containsKey(EnchantmentsRegistry.WALLJUMP_ENCHANTMENT);
+            return enchantments.containsKey(WallJumpEnchantments.WALLJUMP_ENCHANTMENT);
         }
         return false;
     }
 
     static boolean getWallClingEligibility() {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
         BlockState blockState = pl.getLevel().getBlockState(getWallPos());
 
         // No Wall Clinging on these Blocks!
@@ -92,8 +92,8 @@ public interface IWallJumpAccessor {
 
     static BlockPos getWallPos() {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
         BlockPos clingPos = pl.blockPosition().relative(getWallClingDirection());
         return pl.getLevel().getBlockState(clingPos).getMaterial().isSolid() ? clingPos : clingPos.relative(Direction.UP);
     }
@@ -158,8 +158,8 @@ public interface IWallJumpAccessor {
 
     static void playBreakSound(BlockPos blockPos) {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
         BlockState blockState = pl.getLevel().getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().getSoundType(blockState);
         pl.playSound(soundType.getFallSound(), soundType.getVolume() * 0.5F, soundType.getPitch());
@@ -167,8 +167,8 @@ public interface IWallJumpAccessor {
 
     static void playHitSound(BlockPos blockPos) {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
         BlockState blockState = pl.getLevel().getBlockState(blockPos);
         SoundType soundType = blockState.getBlock().getSoundType(blockState);
         pl.playSound(soundType.getHitSound(), soundType.getVolume() * 0.25F, soundType.getPitch());
@@ -177,14 +177,14 @@ public interface IWallJumpAccessor {
     // Speed Boost
     static int getEquipmentBoost(EquipmentSlot slot) {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
         ItemStack stack = pl.getItemBySlot(slot);
 
         if (!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-            if (enchantments.containsKey(EnchantmentsRegistry.SPEEDBOOST_ENCHANTMENT))
-                return enchantments.get(EnchantmentsRegistry.SPEEDBOOST_ENCHANTMENT);
+            if (enchantments.containsKey(WallJumpEnchantments.SPEEDBOOST_ENCHANTMENT))
+                return enchantments.get(WallJumpEnchantments.SPEEDBOOST_ENCHANTMENT);
         }
         return 0;
     }
@@ -192,18 +192,18 @@ public interface IWallJumpAccessor {
     // Double Jump
     static int getJumpCount() {
         LocalPlayer pl = Minecraft.getInstance().player;
+        assert pl != null;
 
         int jumpCount = 0;
 
         if(WallJumpConfig.getConfigEntries().enableDoubleJump)
             jumpCount += WallJumpConfig.getConfigEntries().countDoubleJump;
 
-        assert pl != null;
         ItemStack stack = pl.getItemBySlot(EquipmentSlot.FEET);
         if(!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-            if(enchantments.containsKey(EnchantmentsRegistry.DOUBLEJUMP_ENCHANTMENT))
-                jumpCount += enchantments.get(EnchantmentsRegistry.DOUBLEJUMP_ENCHANTMENT);
+            if(enchantments.containsKey(WallJumpEnchantments.DOUBLEJUMP_ENCHANTMENT))
+                jumpCount += enchantments.get(WallJumpEnchantments.DOUBLEJUMP_ENCHANTMENT);
         }
         return jumpCount;
     }

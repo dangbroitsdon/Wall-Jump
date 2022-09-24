@@ -1,7 +1,7 @@
 package genandnic.walljump.logic;
 
-import genandnic.walljump.WallJumpClient;
-import genandnic.walljump.util.FallingSound;
+import genandnic.walljump.WallJump;
+import genandnic.walljump.util.WallJumpFallingSound;
 import genandnic.walljump.util.registry.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -28,15 +28,15 @@ public class MiscLogic {
         assert pl != null;
 
         if(pl.fallDistance > 1.5 && !pl.isFallFlying()) {
-            if(WallJumpConfig.getConfigEntries().playFallingSound && WallJumpClient.FALLING_SOUND.isStopped()) {
-                WallJumpClient.FALLING_SOUND = new FallingSound(pl);
-                Minecraft.getInstance().getSoundManager().play(WallJumpClient.FALLING_SOUND);
+            if(WallJumpConfig.getConfigEntries().playFallingSound && WallJump.FALLING_SOUND.isStopped()) {
+                WallJump.FALLING_SOUND = new WallJumpFallingSound(pl);
+                Minecraft.getInstance().getSoundManager().play(WallJump.FALLING_SOUND);
             }
         }
     }
 
     public static void addFallingSound() {
-        WallJumpClient.FALLING_SOUND = new FallingSound(Minecraft.getInstance().player);
-        Minecraft.getInstance().getSoundManager().play(WallJumpClient.FALLING_SOUND);
+        WallJump.FALLING_SOUND = new WallJumpFallingSound(Minecraft.getInstance().player);
+        Minecraft.getInstance().getSoundManager().play(WallJump.FALLING_SOUND);
     }
 }

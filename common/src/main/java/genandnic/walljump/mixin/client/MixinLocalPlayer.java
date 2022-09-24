@@ -21,7 +21,7 @@ public class MixinLocalPlayer {
     }
 
     @Inject(method = "tick", at = @At("TAIL"))
-    private void wju$tickFallSound(CallbackInfo ci) {
+    private void wju$tickFallingSound(CallbackInfo ci) {
         MiscLogic.playFallingSound();
     }
 }

@@ -7,8 +7,12 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 
 public class SpeedBoostEnchantment extends Enchantment {
-    public SpeedBoostEnchantment(Enchantment.Rarity weight, EnchantmentCategory category, EquipmentSlot[] slots) {
-        super(weight, category, slots);
+    public SpeedBoostEnchantment() {
+        super(Enchantment.Rarity.RARE,
+                EnchantmentCategory.ARMOR_FEET,
+                new EquipmentSlot[] {
+                        EquipmentSlot.FEET
+                });
     }
 
     @Override

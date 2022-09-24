@@ -7,11 +7,11 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 
-public class FallingSound extends AbstractTickableSoundInstance {
+public class WallJumpFallingSound extends AbstractTickableSoundInstance {
 
     private final LocalPlayer player;
 
-    public FallingSound(LocalPlayer player) {
+    public WallJumpFallingSound(LocalPlayer player) {
         super(SoundEvents.ELYTRA_FLYING, SoundSource.PLAYERS, RandomSource.create());
         this.player = player;
         this.looping = true;

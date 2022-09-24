@@ -1,6 +1,6 @@
 package genandnic.walljump.mixin;
 
-import genandnic.walljump.util.registry.ReceiversRegistry;
+import genandnic.walljump.util.registry.WallJumpServerReceivers;
 import net.minecraft.network.Connection;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.players.PlayerList;
@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinPlayerList {
     @Inject(method = "placeNewPlayer", at = @At("TAIL"))
     private void wju$sendServerConfigSyncPacket(Connection connection, ServerPlayer serverPlayer, CallbackInfo ci) {
-        ReceiversRegistry.sendServerConfigMessage(serverPlayer);
+        WallJumpServerReceivers.sendServerConfigMessage(serverPlayer);
     }
 }

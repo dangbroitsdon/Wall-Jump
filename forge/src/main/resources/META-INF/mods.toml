@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[41,)"
+loaderVersion = "[40,)"
 license = "GNU AGPLv3"
 
 [[mods]]
@@ -17,7 +17,7 @@ logoFile = "icon.png"
 [[dependencies.walljump]]
 modId = "forge"
 mandatory = true
-versionRange = "[41,)"
+versionRange = "[40,)"
 ordering = "NONE"
 side = "BOTH"
 

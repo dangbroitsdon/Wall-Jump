@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.IntFunction;
 
-import static genandnic.walljump.util.Constants.*;
+import static genandnic.walljump.WallJump.*;
 
-public class ReceiversRegistry {
+public class WallJumpServerReceivers {
     public static boolean serverConfigSynced;
     public static void registerServerReceivers() {
         NetworkManager.registerReceiver(NetworkManager.c2s(), WALL_JUMP_PACKET_ID, (buf, context) -> {
