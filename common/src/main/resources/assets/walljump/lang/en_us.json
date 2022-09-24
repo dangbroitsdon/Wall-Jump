@@ -3,7 +3,7 @@
   "key.categories.walljump": "Wall-Jump! UNOFFICIAL",
   "text.autoconfig.walljump.title": "Wall-Jump! UNOFFICIAL Config",
   "text.autoconfig.walljump.option.blockBlacklist": "Block Blacklist",
-  "text.autoconfig.walljump.option.enableClassicWallJump": "Enable Classic Wall Jump",
+  "text.autoconfig.walljump.option.enableClassicWallCling": "Enable Classic Wall Cling (SHIFT)",
   "text.autoconfig.walljump.option.enableReclinging": "Enable Reclinging",
   "text.autoconfig.walljump.option.enableAutoRotation": "Enable Auto Rotation",
   "text.autoconfig.walljump.option.enableElytraWallCling": "Enable Elytra Wall Cling",
