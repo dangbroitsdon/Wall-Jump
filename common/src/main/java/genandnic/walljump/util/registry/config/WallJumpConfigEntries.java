@@ -1,6 +1,6 @@
 package genandnic.walljump.util.registry.config;
 
-import genandnic.walljump.util.Constants;
+import genandnic.walljump.WallJump;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
@@ -9,7 +9,7 @@ import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import java.util.Collections;
 import java.util.List;
 
-@Config(name = Constants.MOD_ID)
+@Config(name = WallJump.MOD_ID)
 public class WallJumpConfigEntries implements ConfigData {
     @Comment("Allows you to wall cling and wall jump.")
     public boolean enableWallJump = true;

@@ -1,10 +1,34 @@
 plugins {
     id "architectury-plugin" version "3.4-SNAPSHOT"
+    id "io.github.pacifistmc.forgix" version "1.2.6"
     id "dev.architectury.loom" version "0.12.0-SNAPSHOT" apply false
 }
 
 architectury {
     minecraft = rootProject.minecraft_version
+}
+
+forgix {
+    group = rootProject.maven_group
+    mergedJarName = "${rootProject.archives_base_name}-${rootProject.mod_version}-all+${rootProject.minecraft_version}.jar"
+    outputDir = "build/libs/Merged"
+
+    forge {
+        projectName = "forge"
+        jarLocation = "build/libs/${rootProject.archives_base_name}-${rootProject.mod_version}.jar"
+
+        mixin "walljump-common.mixins.json"
+    }
+
+    fabric {
+        projectName = "fabric"
+        jarLocation = "build/libs/${rootProject.archives_base_name}-${rootProject.mod_version}.jar"
+    }
+
+    quilt {
+        projectName = "quilt"
+        jarLocation = "build/libs/${rootProject.archives_base_name}-${rootProject.mod_version}.jar"
+    }
 }
 
 subprojects {
@@ -21,6 +45,9 @@ subprojects {
         // The following line declares the yarn mappings you may select this one as well.
         // mappings "net.fabricmc:yarn:1.19+build.4:v2"
     }
+
+    build.finalizedBy(mergeJars)
+    assemble.finalizedBy(mergeJars)
 }
 
 allprojects {

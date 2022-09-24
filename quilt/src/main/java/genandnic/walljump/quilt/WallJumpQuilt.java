@@ -7,6 +7,6 @@ import org.quiltmc.qsl.base.api.entrypoint.ModInitializer;
 public class WallJumpQuilt implements ModInitializer {
     @Override
     public void onInitialize(ModContainer mod) {
-        WallJump.init();
+        WallJump.initBase();
     }
 }
