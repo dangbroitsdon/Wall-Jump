@@ -1,8 +1,8 @@
 package genandnic.walljump.logic;
 
 import genandnic.walljump.util.IWallJumpAccessor;
-import genandnic.walljump.util.registry.KeyBindingsRegistry;
-import genandnic.walljump.util.registry.ReceiversRegistry;
+import genandnic.walljump.util.registry.WallJumpKeyBindings;
+import genandnic.walljump.util.registry.WallJumpReceivers;
 import genandnic.walljump.util.registry.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -49,7 +49,7 @@ public class WallJumpLogic implements IWallJumpAccessor {
         if(WallJumpConfig.getConfigEntries().enableClassicWallCling) {
             ticksKeyDown = pl.input.shiftKeyDown ? ticksKeyDown + 1 : 0;
         } else {
-            ticksKeyDown = KeyBindingsRegistry.toggleWallJump ? ticksKeyDown + 1 : 0;
+            ticksKeyDown = WallJumpKeyBindings.toggleWallJump ? ticksKeyDown + 1 : 0;
         }
 
         if(ticksWallClinged < 1) {
@@ -91,10 +91,12 @@ public class WallJumpLogic implements IWallJumpAccessor {
 
                 pl.fallDistance = 0.0F;
 
-                ReceiversRegistry.sendWallJumpMessage();
+                WallJumpReceivers.sendWallJumpMessage();
 
                 doWallClingJump((float) WallJumpConfig.getConfigEntries().heightWallJump);
                 staleWalls = new HashSet<>(walls);
+
+                IWallJumpAccessor.getJumpCount();
             }
 
             return;
@@ -123,7 +125,7 @@ public class WallJumpLogic implements IWallJumpAccessor {
 
         if(pl.fallDistance > 2) {
             pl.fallDistance = 0;
-            ReceiversRegistry.sendFallDistanceMessage(pl.fallDistance);
+            WallJumpReceivers.sendFallDistanceMessage(pl.fallDistance);
         }
 
         pl.setDeltaMovement(0.0, motionY, 0.0);

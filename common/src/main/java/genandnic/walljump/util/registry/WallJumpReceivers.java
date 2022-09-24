@@ -1,38 +1,32 @@
 package genandnic.walljump.util.registry;
 
-import genandnic.walljump.util.Constants;
 import genandnic.walljump.util.registry.config.WallJumpConfig;
 import io.netty.buffer.Unpooled;
-import io.netty.handler.codec.DecoderException;
 import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
-import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.IntFunction;
+import static genandnic.walljump.WallJump.*;
 
-public class ReceiversRegistry {
+public class WallJumpReceivers {
     public static boolean serverConfigSynced;
     public static void registerReceivers() {
-        NetworkManager.registerReceiver(NetworkManager.c2s(), Constants.WALL_JUMP_PACKET_ID, (buf, context) -> {
+        NetworkManager.registerReceiver(NetworkManager.c2s(), WALL_JUMP_PACKET_ID, (buf, context) -> {
             Player pl = context.getPlayer();
             boolean didWallJump = buf.readBoolean();
 
             if(didWallJump)
                 pl.causeFoodExhaustion((float) WallJumpConfig.getConfigEntries().exhaustionWallJump);
         });
-        NetworkManager.registerReceiver(NetworkManager.c2s(), Constants.DOUBLE_JUMP_PACKET_ID, (buf, context) -> {
+        NetworkManager.registerReceiver(NetworkManager.c2s(), DOUBLE_JUMP_PACKET_ID, (buf, context) -> {
             Player pl = context.getPlayer();
             boolean didDoubleJump = buf.readBoolean();
 
             if(didDoubleJump)
                 pl.causeFoodExhaustion((float) WallJumpConfig.getConfigEntries().exhaustionDoubleJump);
         });
-        NetworkManager.registerReceiver(NetworkManager.c2s(), Constants.FALL_DISTANCE_PACKET_ID, (buf, context) -> {
+        NetworkManager.registerReceiver(NetworkManager.c2s(), FALL_DISTANCE_PACKET_ID, (buf, context) -> {
             Player pl = context.getPlayer();
             if(pl != null)
                 pl.fallDistance = buf.readFloat();
@@ -42,10 +36,10 @@ public class ReceiversRegistry {
     public static void registerClientReceivers() {
 //        IntFunction<List<String>> i = (x) -> Collections.singletonList(Integer.toString(x));
 
-        NetworkManager.registerReceiver(NetworkManager.s2c(), Constants.SERVER_CONFIG_PACKET_ID, (buf, context) -> {
+        NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableWallJumpEnchantment = buf.readBoolean();
-//            TODO: test this
+//            TODO: figure this out in v1.5.3
 //            if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
 //                List<String> ls1 = new ArrayList<>();
 //                for (int i = 0; i < WallJumpConfig.getConfigEntries().blockBlacklist.size(); ++i) {
@@ -78,19 +72,19 @@ public class ReceiversRegistry {
     public static void sendWallJumpMessage() {
         FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
         packet.writeBoolean(true);
-        NetworkManager.sendToServer(Constants.WALL_JUMP_PACKET_ID, packet);
+        NetworkManager.sendToServer(WALL_JUMP_PACKET_ID, packet);
     }
 
     public static void sendDoubleJumpMessage() {
         FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
         packet.writeBoolean(true);
-        NetworkManager.sendToServer(Constants.DOUBLE_JUMP_PACKET_ID, packet);
+        NetworkManager.sendToServer(DOUBLE_JUMP_PACKET_ID, packet);
     }
 
     public static void sendFallDistanceMessage(float f) {
         FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
         packet.writeFloat(f);
-        NetworkManager.sendToServer(Constants.FALL_DISTANCE_PACKET_ID, packet);
+        NetworkManager.sendToServer(FALL_DISTANCE_PACKET_ID, packet);
     }
 
     public static void sendServerConfigMessage(ServerPlayer pl) {
@@ -120,7 +114,7 @@ public class ReceiversRegistry {
         packet.writeDouble(WallJumpConfig.getConfigEntries().sprintSpeedBoost);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableSpeedBoostEnchantment);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableStepAssist);
-        NetworkManager.sendToPlayer(pl, Constants.SERVER_CONFIG_PACKET_ID, packet);
+        NetworkManager.sendToPlayer(pl, SERVER_CONFIG_PACKET_ID, packet);
         System.out.println("[Wall-Jump! UNOFFICIAL] Synced Server Config");
     }
 }

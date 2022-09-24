@@ -1,9 +1,7 @@
 package genandnic.walljump.forge;
 
 import genandnic.walljump.WallJump;
-import genandnic.walljump.WallJumpClient;
 import genandnic.walljump.util.registry.config.WallJumpConfigEntries;
-import genandnic.walljump.util.Constants;
 import me.shedaniel.architectury.platform.forge.EventBuses;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.gui.screens.Screen;
@@ -13,17 +11,17 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
-@Mod(Constants.MOD_ID)
+@Mod(WallJump.MOD_ID)
 public class WallJumpForge {
     public WallJumpForge() {
-        EventBuses.registerModEventBus(Constants.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
-        EventBuses.getModEventBus(Constants.MOD_ID).get().addListener(this::onClientSetup);
+        EventBuses.registerModEventBus(WallJump.MOD_ID, FMLJavaModLoadingContext.get().getModEventBus());
+        EventBuses.getModEventBus(WallJump.MOD_ID).get().addListener(this::onClientSetup);
         registerConfigScreen();
-        WallJump.init();
+        WallJump.initBase();
     }
 
     private void onClientSetup(FMLClientSetupEvent event) {
-        WallJumpClient.init();
+        WallJump.initClient();
     }
 
     private void registerConfigScreen() {

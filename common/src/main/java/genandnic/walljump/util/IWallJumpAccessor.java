@@ -1,8 +1,8 @@
 package genandnic.walljump.util;
 
 import genandnic.walljump.logic.WallJumpLogic;
-import genandnic.walljump.util.registry.EnchantmentsRegistry;
-import genandnic.walljump.util.registry.KeyBindingsRegistry;
+import genandnic.walljump.util.registry.WallJumpEnchantments;
+import genandnic.walljump.util.registry.WallJumpKeyBindings;
 import genandnic.walljump.util.registry.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -32,7 +32,7 @@ public interface IWallJumpAccessor {
         LocalPlayer pl = Minecraft.getInstance().player;
 
         assert pl != null;
-        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? !pl.input.shiftKeyDown : !KeyBindingsRegistry.toggleWallJump;
+        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? !pl.input.shiftKeyDown : !WallJumpKeyBindings.toggleWallJump;
     }
 
     static boolean getWallJumpEligibility() {
@@ -44,7 +44,7 @@ public interface IWallJumpAccessor {
         ItemStack stack = pl.getItemBySlot(EquipmentSlot.FEET);
         if(!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-            return enchantments.containsKey(EnchantmentsRegistry.WALLJUMP_ENCHANTMENT);
+            return enchantments.containsKey(WallJumpEnchantments.WALLJUMP_ENCHANTMENT);
         }
         return false;
     }
@@ -183,8 +183,8 @@ public interface IWallJumpAccessor {
 
         if (!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-            if (enchantments.containsKey(EnchantmentsRegistry.SPEEDBOOST_ENCHANTMENT))
-                return enchantments.get(EnchantmentsRegistry.SPEEDBOOST_ENCHANTMENT);
+            if (enchantments.containsKey(WallJumpEnchantments.SPEEDBOOST_ENCHANTMENT))
+                return enchantments.get(WallJumpEnchantments.SPEEDBOOST_ENCHANTMENT);
         }
         return 0;
     }
@@ -202,8 +202,8 @@ public interface IWallJumpAccessor {
         ItemStack stack = pl.getItemBySlot(EquipmentSlot.FEET);
         if(!stack.isEmpty()) {
             Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(stack);
-            if(enchantments.containsKey(EnchantmentsRegistry.DOUBLEJUMP_ENCHANTMENT))
-                jumpCount += enchantments.get(EnchantmentsRegistry.DOUBLEJUMP_ENCHANTMENT);
+            if(enchantments.containsKey(WallJumpEnchantments.DOUBLEJUMP_ENCHANTMENT))
+                jumpCount += enchantments.get(WallJumpEnchantments.DOUBLEJUMP_ENCHANTMENT);
         }
         return jumpCount;
     }

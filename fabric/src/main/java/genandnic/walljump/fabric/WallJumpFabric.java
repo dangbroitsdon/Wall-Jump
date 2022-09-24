@@ -6,6 +6,6 @@ import net.fabricmc.api.ModInitializer;
 public class WallJumpFabric implements ModInitializer {
     @Override
     public void onInitialize() {
-        WallJump.init();
+        WallJump.initBase();
     }
 }
