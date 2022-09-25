@@ -2,7 +2,7 @@ package genandnic.walljump.forge;
 
 import dev.architectury.platform.forge.EventBuses;
 import genandnic.walljump.WallJump;
-import genandnic.walljump.util.registry.config.WallJumpConfigEntries;
+import genandnic.walljump.config.WallJumpConfigEntries;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;

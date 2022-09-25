@@ -2,7 +2,7 @@ package genandnic.walljump.logic;
 
 import genandnic.walljump.WallJump;
 import genandnic.walljump.util.WallJumpFallingSound;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 

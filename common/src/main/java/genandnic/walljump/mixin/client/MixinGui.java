@@ -1,7 +1,7 @@
 package genandnic.walljump.mixin.client;
 
-import genandnic.walljump.util.registry.WallJumpReceivers;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpReceivers;
+import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.client.gui.Gui;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
