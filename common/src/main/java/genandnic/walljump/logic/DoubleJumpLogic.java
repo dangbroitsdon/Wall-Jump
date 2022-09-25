@@ -1,12 +1,17 @@
 package genandnic.walljump.logic;
 
+import dev.architectury.networking.NetworkManager;
 import genandnic.walljump.util.IWallJumpAccessor;
-import genandnic.walljump.util.registry.WallJumpServerReceivers;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpServerReceivers;
+import genandnic.walljump.config.WallJumpConfig;
+import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+
+import static genandnic.walljump.WallJump.DOUBLE_JUMP_PACKET_ID;
 
 public class DoubleJumpLogic implements IWallJumpAccessor {
     private static int jumpCount = 0;
@@ -49,7 +54,9 @@ public class DoubleJumpLogic implements IWallJumpAccessor {
             ){
                 pl.jumpFromGround();
 
-                WallJumpServerReceivers.sendDoubleJumpMessage();
+                FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
+                packet.writeBoolean(true);
+                NetworkManager.sendToServer(DOUBLE_JUMP_PACKET_ID, packet);
 
                 jumpCount--;
 

@@ -1,7 +1,7 @@
 package genandnic.walljump.logic;
 
 import genandnic.walljump.util.IWallJumpAccessor;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;

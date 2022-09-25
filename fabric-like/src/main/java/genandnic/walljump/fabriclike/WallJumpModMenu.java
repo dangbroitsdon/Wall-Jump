@@ -2,7 +2,7 @@ package genandnic.walljump.fabriclike;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
-import genandnic.walljump.util.registry.config.WallJumpConfigEntries;
+import genandnic.walljump.config.WallJumpConfigEntries;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

@@ -1,6 +1,6 @@
-package genandnic.walljump.util.registry.config;
+package genandnic.walljump.config;
 
-import genandnic.walljump.util.registry.WallJumpServerReceivers;
+import genandnic.walljump.registry.WallJumpServerReceivers;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.serializer.JanksonConfigSerializer;
