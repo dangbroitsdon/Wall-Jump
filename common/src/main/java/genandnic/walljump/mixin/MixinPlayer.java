@@ -1,6 +1,6 @@
 package genandnic.walljump.mixin;
 
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
