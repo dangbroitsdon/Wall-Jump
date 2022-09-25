@@ -1,7 +1,7 @@
 package genandnic.walljump.forge;
 
 import genandnic.walljump.WallJump;
-import genandnic.walljump.util.registry.config.WallJumpConfigEntries;
+import genandnic.walljump.config.WallJumpConfigEntries;
 import me.shedaniel.architectury.platform.forge.EventBuses;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.minecraft.client.gui.screens.Screen;

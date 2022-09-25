@@ -1,8 +1,8 @@
-package genandnic.walljump.util.registry;
+package genandnic.walljump.registry;
 
 import me.shedaniel.architectury.event.events.client.ClientTickEvent;
 import me.shedaniel.architectury.registry.KeyBindings;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.client.KeyMapping;
 import org.lwjgl.glfw.GLFW;
 

@@ -1,12 +1,15 @@
 package genandnic.walljump.logic;
 
 import genandnic.walljump.util.IWallJumpAccessor;
-import genandnic.walljump.util.registry.WallJumpKeyBindings;
-import genandnic.walljump.util.registry.WallJumpReceivers;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpKeyBindings;
+import genandnic.walljump.registry.WallJumpReceivers;
+import genandnic.walljump.config.WallJumpConfig;
+import io.netty.buffer.Unpooled;
+import me.shedaniel.architectury.networking.NetworkManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -14,6 +17,8 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import static genandnic.walljump.WallJump.WALL_JUMP_PACKET_ID;
 
 public class WallJumpLogic implements IWallJumpAccessor {
     public static int ticksWallClinged;
@@ -91,7 +96,9 @@ public class WallJumpLogic implements IWallJumpAccessor {
 
                 pl.fallDistance = 0.0F;
 
-                WallJumpReceivers.sendWallJumpMessage();
+                FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
+                packet.writeBoolean(true);
+                NetworkManager.sendToServer(WALL_JUMP_PACKET_ID, packet);
 
                 doWallClingJump((float) WallJumpConfig.getConfigEntries().heightWallJump);
                 staleWalls = new HashSet<>(walls);

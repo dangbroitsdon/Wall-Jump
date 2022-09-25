@@ -1,10 +1,10 @@
 package genandnic.walljump;
 
 import genandnic.walljump.util.WallJumpFallingSound;
-import genandnic.walljump.util.registry.WallJumpKeyBindings;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
-import genandnic.walljump.util.registry.WallJumpEnchantments;
-import genandnic.walljump.util.registry.WallJumpReceivers;
+import genandnic.walljump.registry.WallJumpKeyBindings;
+import genandnic.walljump.config.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpEnchantments;
+import genandnic.walljump.registry.WallJumpReceivers;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import org.apache.logging.log4j.LogManager;

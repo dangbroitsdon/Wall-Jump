@@ -1,9 +1,9 @@
 package genandnic.walljump.util;
 
 import genandnic.walljump.logic.WallJumpLogic;
-import genandnic.walljump.util.registry.WallJumpEnchantments;
-import genandnic.walljump.util.registry.WallJumpKeyBindings;
-import genandnic.walljump.util.registry.config.WallJumpConfig;
+import genandnic.walljump.registry.WallJumpEnchantments;
+import genandnic.walljump.registry.WallJumpKeyBindings;
+import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.BlockPos;

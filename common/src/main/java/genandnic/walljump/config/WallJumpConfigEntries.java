@@ -1,10 +1,11 @@
-package genandnic.walljump.util.registry.config;
+package genandnic.walljump.config;
 
 import genandnic.walljump.WallJump;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
+import net.minecraft.world.item.enchantment.Enchantment;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,10 @@ public class WallJumpConfigEntries implements ConfigData {
     @Comment("If you disable Wall Jump, it enables the enchantment automagically, this option disables the enchantment.")
     @ConfigEntry.Gui.RequiresRestart
     public boolean enableWallJumpEnchantment = false;
+
+    @Comment("The rarity for Wall-Jump! Enchant, i.e. how often it appears in enchanting table, etc.")
+    @ConfigEntry.Gui.RequiresRestart
+    public Enchantment.Rarity wallJumpEnchantmentRarity = Enchantment.Rarity.UNCOMMON;
 
     @Comment("Blacklists block inputted; can't Wall Jump off it, format is 'block.(mod name or minecraft).(name)', use underscores as spaces")
     public List<String> blockBlacklist = Collections.emptyList();
@@ -50,6 +55,10 @@ public class WallJumpConfigEntries implements ConfigData {
     @ConfigEntry.Gui.RequiresRestart
     public boolean enableDoubleJumpEnchantment = false;
 
+    @Comment("If you disable Wall Jump, it enables the enchantment automagically, this option disables the enchantment.")
+    @ConfigEntry.Gui.RequiresRestart
+    public Enchantment.Rarity doubleJumpEnchantmentRarity = Enchantment.Rarity.RARE;
+
     @Comment("Changes the Jump Count for Double Jump so you can instead have a Triple Jump or even a Quadruple Jump.")
     public int countDoubleJump = 1;
 
@@ -71,6 +80,10 @@ public class WallJumpConfigEntries implements ConfigData {
     @Comment("If you disable Speed Boost, it enables the enchantment automagically, this option disables the enchantment.")
     @ConfigEntry.Gui.RequiresRestart
     public boolean enableSpeedBoostEnchantment = false;
+
+    @Comment("The rarity for Speedboost Enchant, i.e. how often it appears in enchanting table, etc.")
+    @ConfigEntry.Gui.RequiresRestart
+    public Enchantment.Rarity speedBoostEnchantmentRarity = Enchantment.Rarity.RARE;
 
     @Comment("Walk up steps even while airborne, also jump over fences.")
     public boolean enableStepAssist = true;

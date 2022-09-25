@@ -1,15 +1,17 @@
-package genandnic.walljump.util.registry.enchantments;
+package genandnic.walljump.enchantments;
 
+import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import net.minecraft.world.item.enchantment.ProtectionEnchantment;
+import org.jetbrains.annotations.NotNull;
 
-public class DoubleJumpEnchantment extends Enchantment {
+public class DoubleJumpEnchantment extends CustomEnchantment {
 
     public DoubleJumpEnchantment() {
-        super(Enchantment.Rarity.RARE,
+        super(WallJumpConfig.getConfigEntries().doubleJumpEnchantmentRarity,
                 EnchantmentCategory.ARMOR_FEET,
                 new EquipmentSlot[] {
                         EquipmentSlot.FEET
@@ -33,11 +35,11 @@ public class DoubleJumpEnchantment extends Enchantment {
 
     @Override
     public int getMaxCost(int level) {
-        return level * 60;
+        return level * 30;
     }
 
     @Override
-    public boolean checkCompatibility(Enchantment enchantment) {
+    public boolean checkCompatibility(@NotNull Enchantment enchantment) {
         if(enchantment instanceof ProtectionEnchantment) {
             ProtectionEnchantment protection = (ProtectionEnchantment) enchantment;
             return protection.type != ProtectionEnchantment.Type.FALL;
@@ -48,4 +50,14 @@ public class DoubleJumpEnchantment extends Enchantment {
 
     @Override
     public boolean canEnchant(ItemStack stack) {  return stack.isEnchantable();   }
+
+    @Override
+    public boolean enableEnchantment() {
+        return WallJumpConfig.getConfigEntries().enableDoubleJumpEnchantment && !WallJumpConfig.getConfigEntries().enableDoubleJump;
+    }
+
+    @Override
+    public String getName() {
+        return "doublejump";
+    }
 }
