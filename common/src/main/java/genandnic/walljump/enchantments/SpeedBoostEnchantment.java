@@ -40,7 +40,7 @@ public class SpeedBoostEnchantment extends CustomEnchantment {
 
     @Override
     public boolean enableEnchantment() {
-        return WallJumpConfig.getConfigEntries().enableWallJumpEnchantment && !WallJumpConfig.getConfigEntries().enableWallJump;
+        return WallJumpConfig.getConfigEntries().enableSpeedBoostEnchantment && WallJumpConfig.getConfigEntries().sprintSpeedBoost == 0;
     }
 
     @Override

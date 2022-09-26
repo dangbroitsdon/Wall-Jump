@@ -21,7 +21,6 @@ public class MixinPlayerList {
         System.out.println("[Wall-Jump! UNOFFICIAL] Syncing Server Config");
         FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableWallJump);
-        packet.writeBoolean(WallJumpConfig.getConfigEntries().enableWallJumpEnchantment);
         if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
             packet.writeCollection(WallJumpConfig.getConfigEntries().blockBlacklist, FriendlyByteBuf::writeUtf);
         }
@@ -33,16 +32,14 @@ public class MixinPlayerList {
         packet.writeInt(WallJumpConfig.getConfigEntries().delayWallClingSlide);
         packet.writeDouble(WallJumpConfig.getConfigEntries().exhaustionWallJump);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableDoubleJump);
-        packet.writeBoolean(WallJumpConfig.getConfigEntries().enableDoubleJumpEnchantment);
         packet.writeInt(WallJumpConfig.getConfigEntries().countDoubleJump);
         packet.writeDouble(WallJumpConfig.getConfigEntries().exhaustionDoubleJump);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().playFallingSound);
         packet.writeDouble(WallJumpConfig.getConfigEntries().minFallDistance);
         packet.writeDouble(WallJumpConfig.getConfigEntries().elytraSpeedBoost);
         packet.writeDouble(WallJumpConfig.getConfigEntries().sprintSpeedBoost);
-        packet.writeBoolean(WallJumpConfig.getConfigEntries().enableSpeedBoostEnchantment);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableStepAssist);
         NetworkManager.sendToPlayer(serverPlayer, SERVER_CONFIG_PACKET_ID, packet);
-        System.out.println("[Wall-Jump! UNOFFICIAL] Synced Server Config");;
+        System.out.println("[Wall-Jump! UNOFFICIAL] Synced Server Config");
     }
 }
