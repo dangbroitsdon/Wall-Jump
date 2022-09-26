@@ -4,7 +4,6 @@ import dev.architectury.networking.NetworkManager;
 import genandnic.walljump.config.WallJumpConfig;
 import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.Collections;
@@ -42,7 +41,6 @@ public class WallJumpReceivers {
 
         NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
-            WallJumpConfig.getConfigEntries().enableWallJumpEnchantment = buf.readBoolean();
             if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
                 WallJumpConfig.getConfigEntries().blockBlacklist = buf.readCollection(i, FriendlyByteBuf::readUtf);
             }
@@ -54,14 +52,12 @@ public class WallJumpReceivers {
             WallJumpConfig.getConfigEntries().delayWallClingSlide = buf.readInt();
             WallJumpConfig.getConfigEntries().exhaustionWallJump = buf.readDouble();
             WallJumpConfig.getConfigEntries().enableDoubleJump = buf.readBoolean();
-            WallJumpConfig.getConfigEntries().enableDoubleJumpEnchantment = buf.readBoolean();
             WallJumpConfig.getConfigEntries().countDoubleJump = buf.readInt();
             WallJumpConfig.getConfigEntries().exhaustionDoubleJump = buf.readDouble();
             WallJumpConfig.getConfigEntries().playFallingSound = buf.readBoolean();
             WallJumpConfig.getConfigEntries().minFallDistance = buf.readDouble();
             WallJumpConfig.getConfigEntries().elytraSpeedBoost = buf.readDouble();
             WallJumpConfig.getConfigEntries().sprintSpeedBoost = buf.readDouble();
-            WallJumpConfig.getConfigEntries().enableSpeedBoostEnchantment = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableStepAssist = buf.readBoolean();
             System.out.println("[Wall-Jump! UNOFFICIAL] Server Config has been received and synced on Client!");
             serverConfigSynced = true;

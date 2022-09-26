@@ -29,6 +29,7 @@ public class WallJump {
 
     public static void initClient() {
         WallJumpKeyMappings.registerKeyMapping();
+        WallJumpReceivers.registerClientReceivers();
         WallJumpKeyMappings.registerClientTickEvent();
         FALLING_SOUND = new WallJumpFallingSound(Minecraft.getInstance().player);
         LOGGER.info("[Wall-Jump! UNOFFICIAL] Client is initialized!");
