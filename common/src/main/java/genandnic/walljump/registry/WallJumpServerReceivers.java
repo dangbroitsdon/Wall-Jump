@@ -28,7 +28,7 @@ public class WallJumpServerReceivers {
             boolean didDoubleJump = buf.readBoolean();
 
             if(didDoubleJump)
-                pl.causeFoodExhaustion((float) WallJumpConfig.getConfigEntries().exhaustionDoubleJump);
+                pl.causeFoodExhaustion((float) WallJumpConfig.getConfigEntries().exhaustionDoubleJump * (float) WallJumpConfig.getConfigEntries().exhaustionDoubleJumpMultiplier);
         });
 
         NetworkManager.registerReceiver(NetworkManager.c2s(), FALL_DISTANCE_PACKET_ID, (buf, context) -> {

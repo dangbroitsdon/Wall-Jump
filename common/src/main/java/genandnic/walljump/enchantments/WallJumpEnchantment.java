@@ -2,6 +2,7 @@ package genandnic.walljump.enchantments;
 
 import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
 import org.jetbrains.annotations.NotNull;
@@ -43,12 +44,12 @@ public class WallJumpEnchantment extends CustomEnchantment {
             return false;
         }
 
-        return stack.isEnchantable();
+        return stack.getItem() instanceof ArmorItem && ((ArmorItem) stack.getItem()).getSlot() == EquipmentSlot.FEET;
     }
 
     @Override
     public boolean enableEnchantment() {
-        return WallJumpConfig.getConfigEntries().enableWallJumpEnchantment && !WallJumpConfig.getConfigEntries().enableWallJump;
+        return WallJumpConfig.getConfigEntries().enableWallJumpEnchantment;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package genandnic.walljump.util;
 
+import genandnic.walljump.logic.Logic;
 import genandnic.walljump.logic.WallJumpLogic;
 import genandnic.walljump.registry.WallJumpEnchantments;
 import genandnic.walljump.registry.WallJumpKeyMappings;
@@ -25,7 +26,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 public interface IWallJumpAccessor {
-    int ticksWallClinged = 0;
+//    int ticksWallClinged = 0;
 
     // Wall Jump
     static boolean getClassicWallJumpEligibility() {
@@ -55,14 +56,12 @@ public interface IWallJumpAccessor {
 
         BlockState blockState = pl.getLevel().getBlockState(getWallPos());
 
-        // No Wall Clinging on these Blocks!
         for (String block : WallJumpConfig.getConfigEntries().blockBlacklist) {
             if (blockState.getBlock().getDescriptionId().contains(block.toLowerCase())) {
                 return false;
             }
         }
 
-        // If on ladder, Y Velocity greater than .1 or NO FOOD, etc. then no WALLCLINGING
         if(pl.onClimbable()
                 || pl.getDeltaMovement().y > 0.1
                 || pl.getFoodData().getFoodLevel() < 1
@@ -77,8 +76,11 @@ public interface IWallJumpAccessor {
             return false;
         }
 
-        // Allow ReClinging
-        if(WallJumpConfig.getConfigEntries().enableReclinging || pl.position().y < WallJumpLogic.lastJumpY - 1) {
+        // Allow ReClinging for double jump and such
+        if(WallJumpConfig.getConfigEntries().enableReclinging
+                || pl.position().y < WallJumpLogic.lastJumpY - 1
+                || pl.getDeltaMovement().y < 0.333
+        ) {
             return true;
         }
 
@@ -111,7 +113,7 @@ public interface IWallJumpAccessor {
                 pl.getZ() + 0.001
         );
 
-        double dist = (pl.getBbWidth() / 2) + (WallJumpLogic.ticksWallClinged > 0 ? 0.1 : 0.06);
+        double dist = (pl.getBbWidth() / 2) + (Logic.ticksWallClinged > 0 ? 0.1 : 0.06);
 
         AABB[] axes = {
                 box.expandTowards(0, 0, dist),

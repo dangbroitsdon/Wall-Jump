@@ -62,9 +62,11 @@ public class WallJumpConfigEntries implements ConfigData {
     @ConfigEntry.Gui.RequiresRestart
     public int countDoubleJump = 1;
 
-    @Comment("Exhaustion gained per double jump.")
+    @Comment("Exhaustion gained per jump of doublejump.")
     public double exhaustionDoubleJump = 1.2;
 
+    @Comment("Multiplier for Exhaustion gained per jump of doublejump (ONLY IF YOU WANNA BE FREAKY).")
+    public double exhaustionDoubleJumpMultiplier = 0;
     @Comment("Play a rush of wind as you fall to your doom.")
     public boolean playFallingSound = true;
 

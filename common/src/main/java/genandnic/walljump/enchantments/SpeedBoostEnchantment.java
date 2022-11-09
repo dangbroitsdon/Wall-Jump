@@ -2,6 +2,7 @@ package genandnic.walljump.enchantments;
 
 import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ElytraItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentCategory;
@@ -36,7 +37,7 @@ public class SpeedBoostEnchantment extends CustomEnchantment {
     }
 
     @Override
-    public boolean canEnchant(ItemStack stack) {  return stack.isEnchantable() || stack.getItem() instanceof ElytraItem;  }
+    public boolean canEnchant(ItemStack stack) {  return stack.getItem() instanceof ArmorItem && ((ArmorItem) stack.getItem()).getSlot() == EquipmentSlot.FEET || stack.getItem() instanceof ElytraItem;  }
 
     @Override
     public boolean enableEnchantment() {
