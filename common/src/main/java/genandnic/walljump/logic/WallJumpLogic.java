@@ -102,8 +102,6 @@ public class WallJumpLogic implements IWallJumpAccessor {
 
                 doWallClingJump((float) WallJumpConfig.getConfigEntries().heightWallJump);
                 staleWalls = new HashSet<>(walls);
-
-                IWallJumpAccessor.getJumpCount();
             }
 
             return;

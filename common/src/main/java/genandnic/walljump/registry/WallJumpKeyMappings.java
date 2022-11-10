@@ -23,8 +23,8 @@ public class WallJumpKeyMappings {
     }
 
     public static void registerClientTickEvent() {
-        ClientTickEvent.CLIENT_POST.register(m -> {
-            toggleWallJump = KEY_WALLJUMP.isDown();
-        });
+        if (KEY_WALLJUMP != null) {
+            ClientTickEvent.CLIENT_POST.register(m -> toggleWallJump = KEY_WALLJUMP.isDown());
+        }
     }
 }
