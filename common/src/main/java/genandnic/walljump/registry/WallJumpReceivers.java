@@ -23,7 +23,7 @@ public class WallJumpReceivers {
             boolean didDoubleJump = buf.readBoolean();
 
             if(didDoubleJump)
-                pl.causeFoodExhaustion((float) WallJumpConfig.getConfigEntries().exhaustionDoubleJump);
+                pl.causeFoodExhaustion((float) WallJumpConfig.getConfigEntries().exhaustionDoubleJump * (float) WallJumpConfig.getConfigEntries().exhaustionDoubleJumpMultiplier);
         });
         NetworkManager.registerReceiver(NetworkManager.c2s(), FALL_DISTANCE_PACKET_ID, (buf, context) -> {
             Player pl = context.getPlayer();
@@ -37,7 +37,7 @@ public class WallJumpReceivers {
 
         NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
-//            TODO: figure this out in v1.5.4: the rewrite
+//            TODO: figure this out in v2.0: the rewrite
 //            if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
 //                List<String> ls1 = new ArrayList<>();
 //                for (int i = 0; i < WallJumpConfig.getConfigEntries().blockBlacklist.size(); ++i) {
@@ -55,6 +55,7 @@ public class WallJumpReceivers {
             WallJumpConfig.getConfigEntries().enableDoubleJump = buf.readBoolean();
             WallJumpConfig.getConfigEntries().countDoubleJump = buf.readInt();
             WallJumpConfig.getConfigEntries().exhaustionDoubleJump = buf.readDouble();
+            WallJumpConfig.getConfigEntries().exhaustionDoubleJumpMultiplier = buf.readDouble();
             WallJumpConfig.getConfigEntries().playFallingSound = buf.readBoolean();
             WallJumpConfig.getConfigEntries().minFallDistance = buf.readDouble();
             WallJumpConfig.getConfigEntries().elytraSpeedBoost = buf.readDouble();

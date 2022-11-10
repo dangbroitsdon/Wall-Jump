@@ -13,7 +13,7 @@ import net.minecraft.world.phys.Vec3;
 
 import static genandnic.walljump.WallJump.DOUBLE_JUMP_PACKET_ID;
 
-public class DoubleJumpLogic implements IWallJumpAccessor {
+public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
     private static int jumpCount = 0;
     private static boolean jumpKey = false;
 

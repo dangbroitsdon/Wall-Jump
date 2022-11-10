@@ -36,6 +36,7 @@ public class MixinPlayerList {
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableDoubleJump);
         packet.writeInt(WallJumpConfig.getConfigEntries().countDoubleJump);
         packet.writeDouble(WallJumpConfig.getConfigEntries().exhaustionDoubleJump);
+        packet.writeDouble(WallJumpConfig.getConfigEntries().exhaustionDoubleJumpMultiplier);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().playFallingSound);
         packet.writeDouble(WallJumpConfig.getConfigEntries().minFallDistance);
         packet.writeDouble(WallJumpConfig.getConfigEntries().elytraSpeedBoost);
