@@ -20,7 +20,7 @@ import java.util.Set;
 
 import static genandnic.walljump.WallJump.WALL_JUMP_PACKET_ID;
 
-public class WallJumpLogic implements IWallJumpAccessor {
+public class WallJumpLogic extends Logic implements IWallJumpAccessor {
     public static int ticksWallClinged;
     private static double clingX, clingZ;
     public static double lastJumpY = Double.MAX_VALUE;

@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.Map;
 
 public interface IWallJumpAccessor {
-    int ticksWallClinged = 0;
 
     // Wall Jump
     static boolean getClassicWallJumpEligibility() {
