@@ -10,6 +10,7 @@
   "text.autoconfig.walljump.option.elytraSpeedBoost": "Elytra Speed Boost",
   "text.autoconfig.walljump.option.exhaustionWallJump": "Wall Jump Exhaustion",
   "text.autoconfig.walljump.option.exhaustionDoubleJump": "Double Jump Exhaustion",
+  "text.autoconfig.walljump.option.exhaustionDoubleJumpMultiplier": "Double Jump Exhaustion Multiplier",
   "text.autoconfig.walljump.option.minFallDistance": "Minimum Distance for Falling Sound",
   "text.autoconfig.walljump.option.playFallingSound": "Play Falling Sound",
   "text.autoconfig.walljump.option.sprintSpeedBoost": "Sprint Speed Boost",

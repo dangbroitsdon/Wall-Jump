@@ -78,7 +78,10 @@ public interface IWallJumpAccessor {
         }
 
         // Allow ReClinging
-        if(WallJumpConfig.getConfigEntries().enableReclinging || pl.position().y < WallJumpLogic.lastJumpY - 1) {
+        if(WallJumpConfig.getConfigEntries().enableReclinging
+                || pl.position().y < WallJumpLogic.lastJumpY - 1
+                || pl.getDeltaMovement().y < 0.333
+        ) {
             return true;
         }
 
