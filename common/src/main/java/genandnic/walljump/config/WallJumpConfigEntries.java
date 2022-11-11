@@ -29,6 +29,9 @@ public class WallJumpConfigEntries implements ConfigData {
     @Comment("Enables Elytra Wall Cling: Clinging to the Wall with Elytra Deployed.")
     public boolean enableElytraWallCling = false;
 
+    @Comment("Enables Invisible Wall Cling: Clinging to the Wall whilst Invisible.")
+    public boolean enableInvisibleWallCling = false;
+
     @Comment("Classic Wall Cling which allows Crouch, the reason this can't be keybinded is because Fabric doesn't support Multi Mapping.")
     @ConfigEntry.Gui.RequiresRestart
     public boolean enableClassicWallCling = false;
@@ -66,7 +69,7 @@ public class WallJumpConfigEntries implements ConfigData {
     public double exhaustionDoubleJump = 1.2;
 
     @Comment("Multiplier for Exhaustion gained per jump of doublejump (ONLY IF YOU WANNA BE FREAKY).")
-    public double exhaustionDoubleJumpMultiplier = 0;
+    public double exhaustionDoubleJumpMultiplier = 1;
     @Comment("Play a rush of wind as you fall to your doom.")
     public boolean playFallingSound = true;
 
