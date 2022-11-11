@@ -1,5 +1,6 @@
 package genandnic.walljump.util;
 
+import genandnic.walljump.logic.Logic;
 import genandnic.walljump.logic.WallJumpLogic;
 import genandnic.walljump.registry.WallJumpEnchantments;
 import genandnic.walljump.registry.WallJumpKeyBindings;
@@ -49,8 +50,10 @@ public interface IWallJumpAccessor {
 
     static boolean getWallClingEligibility() {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
+        boolean elytraWallCling = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
+        boolean invisibleWallCling = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
         BlockState blockState = pl.level.getBlockState(getWallPos());
 
         // No Wall Clinging on these Blocks!
@@ -60,12 +63,11 @@ public interface IWallJumpAccessor {
             }
         }
 
-        // If on ladder, Y Velocity greater than .1 or NO FOOD, etc. then no WALLCLINGING
         if(pl.onClimbable()
                 || pl.getDeltaMovement().y > 0.1
                 || pl.getFoodData().getFoodLevel() < 1
-                || (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling)
-                || pl.isInvisible()
+                || elytraWallCling
+                || invisibleWallCling
         ) {
             return false;
         }
@@ -76,7 +78,10 @@ public interface IWallJumpAccessor {
         }
 
         // Allow ReClinging
-        if(WallJumpConfig.getConfigEntries().enableReclinging || pl.position().y < WallJumpLogic.lastJumpY - 1) {
+        if(WallJumpConfig.getConfigEntries().enableReclinging
+                || pl.position().y < WallJumpLogic.lastJumpY - 1
+                || pl.getDeltaMovement().y() < 0.333
+        ) {
             return true;
         }
 
@@ -109,7 +114,7 @@ public interface IWallJumpAccessor {
                 pl.getZ() + 0.001
         );
 
-        double dist = (pl.getBbWidth() / 2) + (WallJumpLogic.ticksWallClinged > 0 ? 0.1 : 0.06);
+        double dist = (pl.getBbWidth() / 2) + (Logic.ticksWallClinged > 0 ? 0.1 : 0.06);
 
         AABB[] axes = {
                 box.expandTowards(0, 0, dist),
