@@ -54,8 +54,8 @@ public interface IWallJumpAccessor {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        boolean elytraWallCling = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
-        boolean invisWallCling = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
+        boolean bl1 = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
+        boolean bl2 = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
         BlockState blockState = pl.getLevel().getBlockState(getWallPos());
 
         for (String block : WallJumpConfig.getConfigEntries().blockBlacklist) {
@@ -67,8 +67,8 @@ public interface IWallJumpAccessor {
         if(pl.onClimbable()
                 || pl.getDeltaMovement().y > 0.1
                 || pl.getFoodData().getFoodLevel() < 1
-                || elytraWallCling
-                || invisWallCling
+                || bl1
+                || bl2
         ) {
             return false;
         }
@@ -79,10 +79,7 @@ public interface IWallJumpAccessor {
         }
 
         // Allow ReClinging for double jump and such
-        if(WallJumpConfig.getConfigEntries().enableReclinging
-                || pl.position().y < WallJumpLogic.lastJumpY - 1
-                || pl.getDeltaMovement().y < 0.333
-        ) {
+        if(WallJumpConfig.getConfigEntries().enableReclinging || pl.position().y < WallJumpLogic.lastJumpY - 1) {
             return true;
         }
 

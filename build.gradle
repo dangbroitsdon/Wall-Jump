@@ -10,7 +10,7 @@ architectury {
 
 forgix {
     group = rootProject.maven_group
-    mergedJarName = "${rootProject.archives_base_name}-${rootProject.mod_version}-all+${rootProject.minecraft_version}.jar"
+    mergedJarName = "${rootProject.archives_base_name}-${rootProject.mod_version}-all-networking-removed+${rootProject.minecraft_version}.jar"
     outputDir = "build/libs/Merged"
 
     forge {
