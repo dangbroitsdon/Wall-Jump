@@ -1,7 +1,5 @@
 package genandnic.walljump.util;
 
-import genandnic.walljump.WallJump;
-import genandnic.walljump.logic.DoubleJumpLogic;
 import genandnic.walljump.logic.Logic;
 import genandnic.walljump.logic.WallJumpLogic;
 import genandnic.walljump.registry.WallJumpEnchantments;
@@ -26,7 +24,6 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 public interface IWallJumpAccessor {
 //    int ticksWallClinged = 0;
@@ -53,13 +50,13 @@ public interface IWallJumpAccessor {
         return false;
     }
 
-    static boolean getWallClingEligibility(Set<Direction> walls, Set<Direction> oWalls) {
+    static boolean getWallClingEligibility() {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
         boolean bl1 = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
         boolean bl2 = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
-        BlockState blockState = pl.getLevel().getBlockState(getWallPos(walls));
+        BlockState blockState = pl.getLevel().getBlockState(getWallPos());
 
         for (String block : WallJumpConfig.getConfigEntries().blockBlacklist) {
             if (blockState.getBlock().getDescriptionId().contains(block.toLowerCase())) {
@@ -86,18 +83,18 @@ public interface IWallJumpAccessor {
         }
 
         // TODO: Rework walls
-        return !oWalls.containsAll(walls);
+        return !WallJumpLogic.staleWalls.containsAll(WallJumpLogic.walls);
     }
 
-    static Direction getWallClingDirection(Set<Direction> walls) {
-        return walls.isEmpty() ? Direction.UP : walls.iterator().next();
+    static Direction getWallClingDirection() {
+        return WallJumpLogic.walls.isEmpty() ? Direction.UP : WallJumpLogic.walls.iterator().next();
     }
 
-    static BlockPos getWallPos(Set<Direction> walls) {
+    static BlockPos getWallPos() {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        BlockPos clingPos = pl.blockPosition().relative(getWallClingDirection(walls));
+        BlockPos clingPos = pl.blockPosition().relative(getWallClingDirection());
         return pl.getLevel().getBlockState(clingPos).getMaterial().isSolid() ? clingPos : clingPos.relative(Direction.UP);
     }
 
@@ -137,7 +134,7 @@ public interface IWallJumpAccessor {
         }
     }
 
-    static void spawnWallParticle(BlockPos blockPos, Set<Direction> walls) {
+    static void spawnWallParticle(BlockPos blockPos) {
         LocalPlayer pl = Minecraft.getInstance().player;
 
         assert pl != null;
@@ -146,7 +143,7 @@ public interface IWallJumpAccessor {
         // Not air blocks
         if (blockState.getRenderShape() != RenderShape.INVISIBLE) {
             Vec3 pos = pl.position();
-            Vec3i motion = getWallClingDirection(walls).getNormal();
+            Vec3i motion = getWallClingDirection().getNormal();
             pl.getLevel().addParticle(
                     new BlockParticleOption(ParticleTypes.BLOCK, blockState),
                     pos.x,

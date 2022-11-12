@@ -59,12 +59,12 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         if(ticksWallClinged < 1) {
 
             //Wall Cling
-            if (ticksKeyDown > 0 && ticksKeyDown < 4 && !walls.isEmpty() && !pl.isOnGround() && IWallJumpAccessor.getWallClingEligibility(walls, staleWalls)) {
+            if (ticksKeyDown > 0 && ticksKeyDown < 4 && !walls.isEmpty() && !pl.isOnGround() && IWallJumpAccessor.getWallClingEligibility()) {
                 pl.animationSpeed = 2.5F;
                 pl.animationSpeedOld = 2.5F;
 
                 if (WallJumpConfig.getConfigEntries().enableAutoRotation) {
-                    pl.setYRot(IWallJumpAccessor.getWallClingDirection(walls).getOpposite().toYRot());
+                    pl.setYRot(IWallJumpAccessor.getWallClingDirection().getOpposite().toYRot());
                     pl.yRotO = pl.getYRot();
                 }
 
@@ -72,8 +72,8 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
                 clingX = pl.position().x;
                 clingZ = pl.position().z;
 
-                IWallJumpAccessor.playHitSound(IWallJumpAccessor.getWallPos(walls));
-                IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos(walls), walls);
+                IWallJumpAccessor.playHitSound(IWallJumpAccessor.getWallPos());
+                IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
             }
 
             return;
@@ -107,7 +107,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         }
 
         if(WallJumpConfig.getConfigEntries().enableAutoRotation) {
-            pl.setYRot(IWallJumpAccessor.getWallClingDirection(walls).getOpposite().toYRot());
+            pl.setYRot(IWallJumpAccessor.getWallClingDirection().getOpposite().toYRot());
             pl.yRotO = pl.getYRot();
         }
 
@@ -119,10 +119,10 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
             motionY = 0.0;
         } else if(motionY < -0.6) {
             motionY = motionY + 0.2;
-            IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos(walls), walls);
+            IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
         } else if(ticksWallClinged++ > WallJumpConfig.getConfigEntries().delayWallClingSlide) {
             motionY = -0.1;
-            IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos(walls), walls);
+            IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
         } else {
             motionY = 0.0;
         }
@@ -162,8 +162,8 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         );
 
         lastJumpY = pl.position().y;
-        IWallJumpAccessor.playBreakSound(IWallJumpAccessor.getWallPos(walls));
-        IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos(walls), walls);
+        IWallJumpAccessor.playBreakSound(IWallJumpAccessor.getWallPos());
+        IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
     }
 
 
