@@ -1,5 +1,6 @@
 package genandnic.walljump.logic;
 
+import genandnic.walljump.registry.WallJumpReceiverRegistry;
 import genandnic.walljump.util.IWallJumpAccessor;
 import genandnic.walljump.registry.WallJumpKeyMappings;
 import genandnic.walljump.config.WallJumpConfig;
@@ -119,6 +120,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
 
         if(pl.fallDistance > 2) {
             pl.resetFallDistance();
+            WallJumpReceiverRegistry.sendFallDistanceMessage(pl.fallDistance);
         }
 
         pl.setDeltaMovement(0.0, motionY, 0.0);

@@ -1,5 +1,6 @@
 package genandnic.walljump;
 
+import genandnic.walljump.registry.WallJumpReceiverRegistry;
 import genandnic.walljump.util.WallJumpFallingSound;
 import genandnic.walljump.registry.WallJumpEnchantments;
 import genandnic.walljump.registry.WallJumpKeyMappings;
@@ -27,6 +28,7 @@ public class WallJump {
     }
     public static void initBase() {
         WallJumpConfig.registerConfig();
+        WallJumpReceiverRegistry.registerServerReceivers();
         WallJumpEnchantments.registerEnchantments();
         LOGGER.info("[Wall-Jump! UNOFFICIAL] is initialized!");
     }

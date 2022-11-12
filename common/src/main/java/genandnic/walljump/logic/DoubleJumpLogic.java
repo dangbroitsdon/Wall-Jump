@@ -1,5 +1,6 @@
 package genandnic.walljump.logic;
 
+import genandnic.walljump.registry.WallJumpReceiverRegistry;
 import genandnic.walljump.util.IWallJumpAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -47,6 +48,7 @@ public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
 
                 jumpCount--;
 
+                WallJumpReceiverRegistry.sendFallDistanceMessage(pl.fallDistance);
                 pl.resetFallDistance();
             }
             jumpKey = true;
