@@ -1,15 +1,11 @@
 package genandnic.walljump.logic;
 
-import dev.architectury.networking.NetworkManager;
 import genandnic.walljump.util.IWallJumpAccessor;
 import genandnic.walljump.registry.WallJumpKeyMappings;
-import genandnic.walljump.registry.WallJumpServerReceivers;
 import genandnic.walljump.config.WallJumpConfig;
-import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.Direction;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.Mth;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -17,8 +13,6 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import static genandnic.walljump.WallJump.WALL_JUMP_PACKET_ID;
 
 public class WallJumpLogic extends Logic implements IWallJumpAccessor {
     private static double clingX, clingZ;
@@ -32,7 +26,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
 
         int ticksKeyDown = 0;
 
-        if(!IWallJumpAccessor.getWallJumpEligibility() || !WallJumpConfig.isModUsable(pl.getLevel())) return;
+        if(!IWallJumpAccessor.getWallJumpEligibility()) return;
 
         if(pl.isOnGround()
                 || pl.getAbilities().flying
@@ -95,10 +89,6 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
 
                 pl.resetFallDistance();
 
-                FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
-                packet.writeBoolean(true);
-                NetworkManager.sendToServer(WALL_JUMP_PACKET_ID, packet);
-
                 doWallClingJump((float) WallJumpConfig.getConfigEntries().heightWallJump);
                 staleWalls = new HashSet<>(walls);
             }
@@ -129,7 +119,6 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
 
         if(pl.fallDistance > 2) {
             pl.resetFallDistance();
-            WallJumpServerReceivers.sendFallDistanceMessage(pl.fallDistance);
         }
 
         pl.setDeltaMovement(0.0, motionY, 0.0);

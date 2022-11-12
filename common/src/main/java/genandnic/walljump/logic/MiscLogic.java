@@ -11,8 +11,6 @@ public class MiscLogic {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        if(!WallJumpConfig.isModUsable(pl.getLevel())) return;
-
         if(pl.horizontalCollision
                 && WallJumpConfig.getConfigEntries().enableStepAssist
                 && pl.getDeltaMovement().y() > -0.2
