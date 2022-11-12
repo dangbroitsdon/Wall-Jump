@@ -5,12 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "client": [
     "client.MixinClientLevel",
-    "client.MixinGui",
     "client.MixinLocalPlayer"
   ],
   "mixins": [
-    "MixinPlayer",
-    "MixinPlayerList"
+    "MixinPlayer"
   ],
   "injectors": {
     "defaultRequire": 1
