@@ -62,6 +62,7 @@ public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
 
                 pl.resetFallDistance();
                 WallJumpServerReceivers.sendFallDistanceMessage(pl.fallDistance);
+
             }
             jumpKey = true;
         }

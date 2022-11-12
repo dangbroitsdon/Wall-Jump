@@ -1,5 +1,7 @@
 package genandnic.walljump.util;
 
+import genandnic.walljump.WallJump;
+import genandnic.walljump.logic.DoubleJumpLogic;
 import genandnic.walljump.logic.Logic;
 import genandnic.walljump.logic.WallJumpLogic;
 import genandnic.walljump.registry.WallJumpEnchantments;
@@ -24,6 +26,7 @@ import net.minecraft.world.phys.Vec3;
 
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public interface IWallJumpAccessor {
 //    int ticksWallClinged = 0;
@@ -50,13 +53,13 @@ public interface IWallJumpAccessor {
         return false;
     }
 
-    static boolean getWallClingEligibility() {
+    static boolean getWallClingEligibility(Set<Direction> walls, Set<Direction> oWalls) {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        boolean elytraWallCling = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
-        boolean invisWallCling = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
-        BlockState blockState = pl.getLevel().getBlockState(getWallPos());
+        boolean bl1 = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
+        boolean bl2 = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
+        BlockState blockState = pl.getLevel().getBlockState(getWallPos(walls));
 
         for (String block : WallJumpConfig.getConfigEntries().blockBlacklist) {
             if (blockState.getBlock().getDescriptionId().contains(block.toLowerCase())) {
@@ -67,8 +70,8 @@ public interface IWallJumpAccessor {
         if(pl.onClimbable()
                 || pl.getDeltaMovement().y > 0.1
                 || pl.getFoodData().getFoodLevel() < 1
-                || elytraWallCling
-                || invisWallCling
+                || bl1
+                || bl2
         ) {
             return false;
         }
@@ -78,27 +81,23 @@ public interface IWallJumpAccessor {
             return false;
         }
 
-        // Allow ReClinging for double jump and such
-        if(WallJumpConfig.getConfigEntries().enableReclinging
-                || pl.position().y < WallJumpLogic.lastJumpY - 1
-                || pl.getDeltaMovement().y < 0.333
-        ) {
+        if(WallJumpConfig.getConfigEntries().enableReclinging || pl.position().y < WallJumpLogic.lastJumpY - 1) {
             return true;
         }
 
-        // When the Original Walls Don't Contain the New Walls!
-        return !WallJumpLogic.staleWalls.containsAll(WallJumpLogic.walls);
+        // TODO: Rework walls
+        return !oWalls.containsAll(walls);
     }
 
-    static Direction getWallClingDirection() {
-        return WallJumpLogic.walls.isEmpty() ? Direction.UP : WallJumpLogic.walls.iterator().next();
+    static Direction getWallClingDirection(Set<Direction> walls) {
+        return walls.isEmpty() ? Direction.UP : walls.iterator().next();
     }
 
-    static BlockPos getWallPos() {
+    static BlockPos getWallPos(Set<Direction> walls) {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        BlockPos clingPos = pl.blockPosition().relative(getWallClingDirection());
+        BlockPos clingPos = pl.blockPosition().relative(getWallClingDirection(walls));
         return pl.getLevel().getBlockState(clingPos).getMaterial().isSolid() ? clingPos : clingPos.relative(Direction.UP);
     }
 
@@ -138,7 +137,7 @@ public interface IWallJumpAccessor {
         }
     }
 
-    static void spawnWallParticle(BlockPos blockPos) {
+    static void spawnWallParticle(BlockPos blockPos, Set<Direction> walls) {
         LocalPlayer pl = Minecraft.getInstance().player;
 
         assert pl != null;
@@ -147,7 +146,7 @@ public interface IWallJumpAccessor {
         // Not air blocks
         if (blockState.getRenderShape() != RenderShape.INVISIBLE) {
             Vec3 pos = pl.position();
-            Vec3i motion = getWallClingDirection().getNormal();
+            Vec3i motion = getWallClingDirection(walls).getNormal();
             pl.getLevel().addParticle(
                     new BlockParticleOption(ParticleTypes.BLOCK, blockState),
                     pos.x,
