@@ -52,8 +52,8 @@ public interface IWallJumpAccessor {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        boolean elytraWallCling = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
-        boolean invisibleWallCling = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
+        boolean bl1 = (pl.isFallFlying() && !WallJumpConfig.getConfigEntries().enableElytraWallCling);
+        boolean bl2 = (pl.isInvisible() && !WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
         BlockState blockState = pl.level.getBlockState(getWallPos());
 
         // No Wall Clinging on these Blocks!
@@ -66,8 +66,8 @@ public interface IWallJumpAccessor {
         if(pl.onClimbable()
                 || pl.getDeltaMovement().y > 0.1
                 || pl.getFoodData().getFoodLevel() < 1
-                || elytraWallCling
-                || invisibleWallCling
+                || bl1
+                || bl2
         ) {
             return false;
         }
@@ -78,9 +78,7 @@ public interface IWallJumpAccessor {
         }
 
         // Allow ReClinging
-        if(WallJumpConfig.getConfigEntries().enableReclinging
-                || pl.position().y < WallJumpLogic.lastJumpY - 1
-                || pl.getDeltaMovement().y() < 0.333
+        if(WallJumpConfig.getConfigEntries().enableReclinging || pl.position().y < WallJumpLogic.lastJumpY - 1
         ) {
             return true;
         }
