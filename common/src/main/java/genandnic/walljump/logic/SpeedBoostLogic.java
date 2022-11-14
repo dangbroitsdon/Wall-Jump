@@ -13,8 +13,10 @@ import net.minecraft.world.phys.Vec3;
 public class SpeedBoostLogic implements IWallJumpAccessor {
     public static void doSpeedBoost() {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
+        if(WallJumpConfig.getConfigEntries().sprintSpeedBoost == 0.0 && WallJumpConfig.getConfigEntries().elytraSpeedBoost == 0.0) return;
+
         MobEffectInstance jumpBoostEffect = pl.getEffect(MobEffects.JUMP);
 
         int jumpBoostLevel = 0;
@@ -41,7 +43,6 @@ public class SpeedBoostLogic implements IWallJumpAccessor {
 
                 if(boost.length() > 0.5)
                     pl.level.addParticle(ParticleTypes.FIREWORK, pos.x, pos.y, pos.z, 0, 0, 0);
-
             }
 
         } else if(pl.isSprinting()) {

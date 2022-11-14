@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LocalPlayer.class)
 public class MixinLocalPlayer {
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "aiStep", at = @At("TAIL"))
     private void wju$tickPlayerLogic(CallbackInfo ci) {
         WallJumpLogic.doWallJump();
         SpeedBoostLogic.doSpeedBoost();
@@ -20,7 +20,7 @@ public class MixinLocalPlayer {
         MiscLogic.doStepAssist();
     }
 
-    @Inject(method = "tick", at = @At("TAIL"))
+    @Inject(method = "aiStep", at = @At("TAIL"))
     private void wju$tickFallingSound(CallbackInfo ci) {
         MiscLogic.playFallingSound();
     }

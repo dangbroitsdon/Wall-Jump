@@ -1,5 +1,6 @@
 package genandnic.walljump.logic;
 
+import genandnic.walljump.config.WallJumpConfig;
 import genandnic.walljump.registry.WallJumpReceiverRegistry;
 import genandnic.walljump.util.IWallJumpAccessor;
 import net.minecraft.client.Minecraft;
@@ -44,18 +45,18 @@ public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
                     && ticksWallClinged < 1
                     && pl.getFoodData().getFoodLevel() > 0
             ){
-                pl.jumpFromGround();
+                    pl.jumpFromGround();
 
-                jumpCount--;
+                    jumpCount--;
 
-                WallJumpReceiverRegistry.sendFallDistanceMessage(pl.fallDistance);
-                pl.resetFallDistance();
+                    WallJumpReceiverRegistry.sendFallDistanceMessage(pl.fallDistance);
+                    pl.resetFallDistance();
             }
             jumpKey = true;
-        }
-        else
-        {
-            jumpKey = false;
-        }
+            }
+            else
+            {
+                jumpKey = false;
+            }
     }
 }
