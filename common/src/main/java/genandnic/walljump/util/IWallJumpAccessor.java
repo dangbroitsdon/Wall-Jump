@@ -82,7 +82,7 @@ public interface IWallJumpAccessor {
             return true;
         }
 
-        // TODO: Rework walls
+        // TODO: Rework walls?
         return !WallJumpLogic.staleWalls.containsAll(WallJumpLogic.walls);
     }
 
