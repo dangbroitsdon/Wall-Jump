@@ -21,12 +21,8 @@ public class MixinPlayerList {
         System.out.println("[Wall-Jump! UNOFFICIAL] Syncing Server Config");
         FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableWallJump);
-//        if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
-//            for (String blocks : WallJumpConfig.getConfigEntries().blockBlacklist) {
-//                packet.writeUtf(blocks);
-//            }
-//        }
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableElytraWallCling);
+        packet.writeBoolean(WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableClassicWallCling);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableReclinging);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableAutoRotation);
@@ -42,6 +38,7 @@ public class MixinPlayerList {
         packet.writeDouble(WallJumpConfig.getConfigEntries().elytraSpeedBoost);
         packet.writeDouble(WallJumpConfig.getConfigEntries().sprintSpeedBoost);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableStepAssist);
+        packet.writeBoolean(WallJumpConfig.getConfigEntries().spaceWallJumpAlt);
         NetworkManager.sendToPlayer(serverPlayer, SERVER_CONFIG_PACKET_ID, packet);
         System.out.println("[Wall-Jump! UNOFFICIAL] Synced Server Config");
     }

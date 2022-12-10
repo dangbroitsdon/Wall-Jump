@@ -27,6 +27,7 @@
   "text.autoconfig.walljump.option.heightWallJump": "Wall Jump Height",
   "text.autoconfig.walljump.option.delayWallClingSlide": "Wall Cling Slide Delay",
   "text.autoconfig.walljump.option.countDoubleJump": "Double Jump Count",
+  "text.autoconfig.walljump.option.spaceWallJumpAlt": "Alternative Wall Jump",
   "enchantment.walljump.walljump": "Wall-Jump!",
   "enchantment.walljump.doublejump": "Double-Jump",
   "enchantment.walljump.speedboost": "Speed-Boost",

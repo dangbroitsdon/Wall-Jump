@@ -33,19 +33,10 @@ public class WallJumpReceivers {
     }
 
     public static void registerClientReceivers() {
-//        IntFunction<List<String>> i = (x) -> Collections.singletonList(Integer.toString(x));
-
         NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
-//            TODO: figure this out in v2.0: the rewrite
-//            if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
-//                List<String> ls1 = new ArrayList<>();
-//                for (int i = 0; i < WallJumpConfig.getConfigEntries().blockBlacklist.size(); ++i) {
-//                    ls1.add(buf.readUtf());
-//                }
-//                WallJumpConfig.getConfigEntries().blockBlacklist = ls1;
-//            }
             WallJumpConfig.getConfigEntries().enableElytraWallCling = buf.readBoolean();
+            WallJumpConfig.getConfigEntries().enableInvisibleWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableClassicWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableReclinging = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableAutoRotation = buf.readBoolean();
@@ -61,6 +52,7 @@ public class WallJumpReceivers {
             WallJumpConfig.getConfigEntries().elytraSpeedBoost = buf.readDouble();
             WallJumpConfig.getConfigEntries().sprintSpeedBoost = buf.readDouble();
             WallJumpConfig.getConfigEntries().enableStepAssist = buf.readBoolean();
+            WallJumpConfig.getConfigEntries().spaceWallJumpAlt = buf.readBoolean();
             System.out.println("[Wall-Jump! UNOFFICIAL] Server Config has been received and synced on Client!");
             serverConfigSynced = true;
         });

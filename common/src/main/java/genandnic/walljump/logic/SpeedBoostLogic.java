@@ -1,6 +1,6 @@
 package genandnic.walljump.logic;
 
-import genandnic.walljump.util.IWallJumpAccessor;
+import genandnic.walljump.util.IWallJumpHelper;
 import genandnic.walljump.config.WallJumpConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -10,11 +10,11 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.phys.Vec3;
 
-public class SpeedBoostLogic implements IWallJumpAccessor {
+public class SpeedBoostLogic {
     public static void doSpeedBoost() {
         LocalPlayer pl = Minecraft.getInstance().player;
-
         assert pl != null;
+
         MobEffectInstance jumpBoostEffect = pl.getEffect(MobEffects.JUMP);
 
         int jumpBoostLevel = 0;
@@ -36,7 +36,7 @@ public class SpeedBoostLogic implements IWallJumpAccessor {
                 if (pl.xRot < 30F)
                     pl.setDeltaMovement(motion.subtract(motion.multiply(0.05, 0.05, 0.05)));
             } else if (pl.isSprinting()) {
-                float elytraSpeedBoost = (float) WallJumpConfig.getConfigEntries().elytraSpeedBoost + (IWallJumpAccessor.getEquipmentBoost(EquipmentSlot.CHEST) * 0.75F);
+                float elytraSpeedBoost = (float) WallJumpConfig.getConfigEntries().elytraSpeedBoost + (IWallJumpHelper.getEquipmentBoost(EquipmentSlot.CHEST) * 0.75F);
                 Vec3 boost = new Vec3(look.x, look.y + 0.5, look.z).normalize().scale(elytraSpeedBoost);
                 if(motion.length() <= boost.length())
                     pl.setDeltaMovement(motion.add(boost.multiply(0.05, 0.05, 0.05)));
@@ -47,7 +47,7 @@ public class SpeedBoostLogic implements IWallJumpAccessor {
             }
 
         } else if(pl.isSprinting()) {
-            float sprintSpeedBoost = (float) WallJumpConfig.getConfigEntries().sprintSpeedBoost + (IWallJumpAccessor.getEquipmentBoost(EquipmentSlot.FEET) * 0.375F);
+            float sprintSpeedBoost = (float) WallJumpConfig.getConfigEntries().sprintSpeedBoost + (IWallJumpHelper.getEquipmentBoost(EquipmentSlot.FEET) * 0.375F);
             if(!pl.isOnGround())
                 sprintSpeedBoost /= 3.125;
 

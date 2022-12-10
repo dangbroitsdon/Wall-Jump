@@ -19,13 +19,17 @@ public class WallJumpKeyBindings {
             );
 
             KeyBindings.registerKeyBinding(KEY_WALLJUMP);
-        };
+        }
     }
 
     public static void registerClientTickEvent() {
         if (KEY_WALLJUMP != null) {
             ClientTickEvent.CLIENT_POST.register(m -> {
-                toggleWallJump = KEY_WALLJUMP.isDown();
+                if(!WallJumpConfig.getConfigEntries().spaceWallJumpAlt) {
+                    toggleWallJump = KEY_WALLJUMP.isDown();
+                } else if(WallJumpConfig.getConfigEntries().spaceWallJumpAlt && KEY_WALLJUMP.isDown()) {
+                    toggleWallJump = !KEY_WALLJUMP.consumeClick();
+                }
             });
         }
     }
