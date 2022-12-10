@@ -1,7 +1,7 @@
 package genandnic.walljump.logic;
 
 import dev.architectury.networking.NetworkManager;
-import genandnic.walljump.util.IWallJumpAccessor;
+import genandnic.walljump.util.IWallJumpHelper;
 import genandnic.walljump.registry.WallJumpKeyMappings;
 import genandnic.walljump.registry.WallJumpReceivers;
 import genandnic.walljump.config.WallJumpConfig;
@@ -20,9 +20,9 @@ import java.util.Set;
 
 import static genandnic.walljump.WallJump.WALL_JUMP_PACKET_ID;
 
-public class WallJumpLogic extends Logic implements IWallJumpAccessor {
-    public static int ticksWallClinged;
+public class WallJumpLogic extends Logic {
     private static double clingX, clingZ;
+    private static int ticksKeyDown;
     public static double lastJumpY = Double.MAX_VALUE;
     public static Set<Direction> walls = new HashSet<>();
     public static Set<Direction> staleWalls = new HashSet<>();
@@ -31,9 +31,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        int ticksKeyDown = 0;
-
-        if(!IWallJumpAccessor.getWallJumpEligibility() || !WallJumpConfig.isModUsable(pl.level)) return;
+        if(!IWallJumpHelper.getWallJumpEligibility() || !WallJumpConfig.isModUsable(pl.level)) return;
 
         if(pl.isOnGround()
                 || pl.getAbilities().flying
@@ -49,7 +47,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
             return;
         }
 
-        IWallJumpAccessor.updateWalls();
+        IWallJumpHelper.updateWalls();
 
         if(WallJumpConfig.getConfigEntries().enableClassicWallCling) {
             ticksKeyDown = pl.input.shiftKeyDown ? ticksKeyDown + 1 : 0;
@@ -60,12 +58,12 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         if(ticksWallClinged < 1) {
 
             //Wall Cling
-            if (ticksKeyDown > 0 && ticksKeyDown < 4 && !walls.isEmpty() && !pl.isOnGround() && IWallJumpAccessor.getWallClingEligibility()) {
+            if (ticksKeyDown > 0 && ticksKeyDown < 4 && !walls.isEmpty() && !pl.isOnGround() && IWallJumpHelper.getWallClingEligibility()) {
                 pl.animationSpeed = 2.5F;
                 pl.animationSpeedOld = 2.5F;
 
                 if (WallJumpConfig.getConfigEntries().enableAutoRotation) {
-                    pl.setYRot(IWallJumpAccessor.getWallClingDirection().getOpposite().toYRot());
+                    pl.setYRot(IWallJumpHelper.getWallClingDirection().getOpposite().toYRot());
                     pl.yRotO = pl.getYRot();
                 }
 
@@ -73,14 +71,14 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
                 clingX = pl.position().x;
                 clingZ = pl.position().z;
 
-                IWallJumpAccessor.playHitSound(IWallJumpAccessor.getWallPos());
-                IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
+                IWallJumpHelper.playHitSound(IWallJumpHelper.getWallPos());
+                IWallJumpHelper.spawnWallParticle(IWallJumpHelper.getWallPos());
             }
 
             return;
         }
         // Wall Jump
-        if(IWallJumpAccessor.getClassicWallJumpEligibility()
+        if(IWallJumpHelper.getClassicWallJumpEligibility()
                 || pl.isOnGround()
                 || !pl.level.getFluidState(pl.blockPosition()).isEmpty()
                 || walls.isEmpty()
@@ -98,7 +96,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
 
                 FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
                 packet.writeBoolean(true);
-                NetworkManager.sendToServer(WALL_JUMP_PACKET_ID, packet);;
+                NetworkManager.sendToServer(WALL_JUMP_PACKET_ID, packet);
 
                 doWallClingJump((float) WallJumpConfig.getConfigEntries().heightWallJump);
                 staleWalls = new HashSet<>(walls);
@@ -108,7 +106,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         }
 
         if(WallJumpConfig.getConfigEntries().enableAutoRotation) {
-            pl.setYRot(IWallJumpAccessor.getWallClingDirection().getOpposite().toYRot());
+            pl.setYRot(IWallJumpHelper.getWallClingDirection().getOpposite().toYRot());
             pl.yRotO = pl.getYRot();
         }
 
@@ -120,10 +118,10 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
             motionY = 0.0;
         } else if(motionY < -0.6) {
             motionY = motionY + 0.2;
-            IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
+            IWallJumpHelper.spawnWallParticle(IWallJumpHelper.getWallPos());
         } else if(ticksWallClinged++ > WallJumpConfig.getConfigEntries().delayWallClingSlide) {
             motionY = -0.1;
-            IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
+            IWallJumpHelper.spawnWallParticle(IWallJumpHelper.getWallPos());
         } else {
             motionY = 0.0;
         }
@@ -140,12 +138,12 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        float strafe = Math.signum(pl.input.leftImpulse) * up * up;
-        float forward = Math.signum(pl.input.forwardImpulse) * up * up;
+        float strafe = Math.signum(pl.input.leftImpulse) * Mth.square(up);
+        float forward = Math.signum(pl.input.forwardImpulse) * Mth.square(up);
 
-        float f = 1.0F / Mth.sqrt(strafe * strafe + up * up + forward * forward);
-        strafe = strafe * f;
-        forward = forward * f;
+        float f = 1.0F / Mth.sqrt(Mth.square(strafe) + Mth.square(up) + Mth.square(forward));
+        strafe *= f;
+        forward *= f;
 
         float f1 = Mth.sin(pl.getYHeadRot() * 0.017453292F) * 0.45F;
         float f2 = Mth.cos(pl.getYHeadRot() * 0.017453292F) * 0.45F;
@@ -163,7 +161,7 @@ public class WallJumpLogic extends Logic implements IWallJumpAccessor {
         );
 
         lastJumpY = pl.position().y;
-        IWallJumpAccessor.playBreakSound(IWallJumpAccessor.getWallPos());
-        IWallJumpAccessor.spawnWallParticle(IWallJumpAccessor.getWallPos());
+        IWallJumpHelper.playBreakSound(IWallJumpHelper.getWallPos());
+        IWallJumpHelper.spawnWallParticle(IWallJumpHelper.getWallPos());
     }
 }

@@ -92,4 +92,7 @@ public class WallJumpConfigEntries implements ConfigData {
 
     @Comment("Walk up steps even while airborne, also jump over fences.")
     public boolean enableStepAssist = true;
+
+    @Comment("Alternative way of Wall-Jumping using Spacebar which requires Pressing Space while Clinged. (might be wonky on anything but Space)")
+    public boolean spaceWallJumpAlt = true;
 }

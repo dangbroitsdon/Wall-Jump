@@ -6,10 +6,6 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.function.IntFunction;
-
 import static genandnic.walljump.WallJump.*;
 
 public class WallJumpReceivers {
@@ -37,12 +33,10 @@ public class WallJumpReceivers {
     }
 
     public static void registerClientReceivers() {
-        IntFunction<List<String>> i = (x) -> Collections.singletonList(Integer.toString(x));
-
         NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
-            if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
-                WallJumpConfig.getConfigEntries().blockBlacklist = buf.readCollection(i, FriendlyByteBuf::readUtf);
+            if(!buf.readList(FriendlyByteBuf::readUtf).isEmpty()) {
+                WallJumpConfig.getConfigEntries().blockBlacklist = buf.readList(FriendlyByteBuf::readUtf);
             }
             WallJumpConfig.getConfigEntries().enableElytraWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableClassicWallCling = buf.readBoolean();
