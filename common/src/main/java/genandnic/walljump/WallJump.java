@@ -1,6 +1,6 @@
 package genandnic.walljump;
 
-import genandnic.walljump.util.WallJumpFallingSound;
+import genandnic.walljump.util.sound.WallJumpFallingSound;
 import genandnic.walljump.registry.WallJumpEnchantments;
 import genandnic.walljump.registry.WallJumpKeyMappings;
 import genandnic.walljump.registry.WallJumpServerReceivers;

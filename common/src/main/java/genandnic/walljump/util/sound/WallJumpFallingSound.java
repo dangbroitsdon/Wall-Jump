@@ -1,4 +1,4 @@
-package genandnic.walljump.util;
+package genandnic.walljump.util.sound;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
@@ -30,9 +30,9 @@ public class WallJumpFallingSound extends AbstractTickableSoundInstance {
             } else {
                 this.pitch = 1.0F;
             }
-        } else
+        } else {
             this.stop();
-
+        }
     }
 }
 

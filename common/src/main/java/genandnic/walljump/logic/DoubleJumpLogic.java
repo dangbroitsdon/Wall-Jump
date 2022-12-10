@@ -1,9 +1,9 @@
 package genandnic.walljump.logic;
 
 import dev.architectury.networking.NetworkManager;
-import genandnic.walljump.util.IWallJumpAccessor;
 import genandnic.walljump.registry.WallJumpServerReceivers;
 import genandnic.walljump.config.WallJumpConfig;
+import genandnic.walljump.util.IWallJumpHelper;
 import io.netty.buffer.Unpooled;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -13,7 +13,7 @@ import net.minecraft.world.phys.Vec3;
 
 import static genandnic.walljump.WallJump.DOUBLE_JUMP_PACKET_ID;
 
-public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
+public class DoubleJumpLogic extends Logic {
     private static int jumpCount = 0;
     private static boolean jumpKey = false;
 
@@ -41,7 +41,7 @@ public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
                 || pl.isPassenger()
                 || pl.getAbilities().flying
         ) {
-            jumpCount = IWallJumpAccessor.getJumpCount();
+            jumpCount = IWallJumpHelper.getJumpCount();
         }
 
         else if(pl.input.jumping)

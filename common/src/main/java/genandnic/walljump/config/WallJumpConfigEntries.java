@@ -22,7 +22,7 @@ public class WallJumpConfigEntries implements ConfigData {
     @ConfigEntry.Gui.RequiresRestart
     public Enchantment.Rarity wallJumpEnchantmentRarity = Enchantment.Rarity.UNCOMMON;
 
-    @Comment("Blacklists block inputted; can't Wall Jump off it, format is 'block.(mod name or minecraft).(name)', use underscores as spaces")
+    @Comment("Blacklists blocks inputted; can't Wall Jump off it, format is '(mod name or minecraft).(name)', use underscores as spaces")
     public List<String> blockBlacklist = List.of();
 
     @Comment("Enables Elytra Wall Cling: Clinging to the Wall with Elytra Deployed.")
@@ -92,4 +92,7 @@ public class WallJumpConfigEntries implements ConfigData {
 
     @Comment("Walk up steps even while airborne, also jump over fences.")
     public boolean enableStepAssist = true;
+
+    @Comment("Alternative way of Wall-Jumping using Spacebar which requires Pressing Space while Clinged. (might be wonky on anything but Space)")
+    public boolean spaceWallJumpAlt = true;
 }

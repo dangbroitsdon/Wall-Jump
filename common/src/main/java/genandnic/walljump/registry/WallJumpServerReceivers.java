@@ -6,10 +6,6 @@ import io.netty.buffer.Unpooled;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.function.IntFunction;
-
 import static genandnic.walljump.WallJump.*;
 
 public class WallJumpServerReceivers {
@@ -39,14 +35,13 @@ public class WallJumpServerReceivers {
     }
 
     public static void registerClientReceivers() {
-        IntFunction<List<String>> i = (x) -> Collections.singletonList(Integer.toString(x));
-
         NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
-            if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
-                WallJumpConfig.getConfigEntries().blockBlacklist = buf.readCollection(i, FriendlyByteBuf::readUtf);
+            if(!buf.readList(FriendlyByteBuf::readUtf).isEmpty()) {
+                WallJumpConfig.getConfigEntries().blockBlacklist = buf.readList(FriendlyByteBuf::readUtf);
             }
             WallJumpConfig.getConfigEntries().enableElytraWallCling = buf.readBoolean();
+            WallJumpConfig.getConfigEntries().enableInvisibleWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableClassicWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableReclinging = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableAutoRotation = buf.readBoolean();
@@ -62,7 +57,8 @@ public class WallJumpServerReceivers {
             WallJumpConfig.getConfigEntries().elytraSpeedBoost = buf.readDouble();
             WallJumpConfig.getConfigEntries().sprintSpeedBoost = buf.readDouble();
             WallJumpConfig.getConfigEntries().enableStepAssist = buf.readBoolean();
-            System.out.println("[Wall-Jump! UNOFFICIAL] Server Config has been received and synced on Client!");
+            WallJumpConfig.getConfigEntries().spaceWallJumpAlt = buf.readBoolean();
+            System.out.println("[Wall-Jump! UNOFFICIAL] ayo your config is synced to server now, meesa say 'Hello There.'");
             serverConfigSynced = true;
         });
     }

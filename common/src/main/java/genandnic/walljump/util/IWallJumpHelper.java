@@ -25,15 +25,13 @@ import net.minecraft.world.phys.Vec3;
 import java.util.HashSet;
 import java.util.Map;
 
-public interface IWallJumpAccessor {
-//    int ticksWallClinged = 0;
-
+public interface IWallJumpHelper {
     // Wall Jump
-    static boolean getClassicWallJumpEligibility() {
+    static boolean checkKeyBind() {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? !pl.input.shiftKeyDown : !WallJumpKeyMappings.toggleWallJump;
+        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? pl.input.shiftKeyDown : !WallJumpKeyMappings.toggleWallJump;
     }
 
     static boolean getWallJumpEligibility() {
@@ -82,7 +80,6 @@ public interface IWallJumpAccessor {
             return true;
         }
 
-        // TODO: Rework walls?
         return !WallJumpLogic.staleWalls.containsAll(WallJumpLogic.walls);
     }
 
