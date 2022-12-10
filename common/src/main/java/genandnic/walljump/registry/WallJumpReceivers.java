@@ -35,9 +35,7 @@ public class WallJumpReceivers {
     public static void registerClientReceivers() {
         NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
-            if(!buf.readList(FriendlyByteBuf::readUtf).isEmpty()) {
-                WallJumpConfig.getConfigEntries().blockBlacklist = buf.readList(FriendlyByteBuf::readUtf);
-            }
+            WallJumpConfig.getConfigEntries().blockBlacklist = buf.readList(FriendlyByteBuf::readUtf);
             WallJumpConfig.getConfigEntries().enableElytraWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableClassicWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableReclinging = buf.readBoolean();
@@ -54,6 +52,7 @@ public class WallJumpReceivers {
             WallJumpConfig.getConfigEntries().elytraSpeedBoost = buf.readDouble();
             WallJumpConfig.getConfigEntries().sprintSpeedBoost = buf.readDouble();
             WallJumpConfig.getConfigEntries().enableStepAssist = buf.readBoolean();
+
             System.out.println("[Wall-Jump! UNOFFICIAL] Server Config has been received and synced on Client!");
             serverConfigSynced = true;
         });
