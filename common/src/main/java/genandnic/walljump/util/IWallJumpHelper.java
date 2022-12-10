@@ -25,7 +25,7 @@ import net.minecraft.world.phys.Vec3;
 import java.util.HashSet;
 import java.util.Map;
 
-public interface IWallJumpAccessor {
+public interface IWallJumpHelper {
     // Wall Jump
     static boolean getClassicWallJumpEligibility() {
         LocalPlayer pl = Minecraft.getInstance().player;

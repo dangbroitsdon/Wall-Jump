@@ -24,7 +24,13 @@ public class WallJumpKeyMappings {
 
     public static void registerClientTickEvent() {
         if (KEY_WALLJUMP != null) {
-            ClientTickEvent.CLIENT_POST.register(m -> toggleWallJump = KEY_WALLJUMP.isDown());
+            ClientTickEvent.CLIENT_POST.register(m -> {
+                if(!WallJumpConfig.getConfigEntries().spaceWallJumpAlt) {
+                    toggleWallJump = KEY_WALLJUMP.isDown();
+                } else if(WallJumpConfig.getConfigEntries().spaceWallJumpAlt && KEY_WALLJUMP.isDown()) {
+                    toggleWallJump = !KEY_WALLJUMP.consumeClick();
+                }
+            });
         }
     }
 }
