@@ -22,9 +22,7 @@ public class MixinPlayerList {
         FriendlyByteBuf packet = new FriendlyByteBuf(Unpooled.buffer());
 
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableWallJump);
-        if(!WallJumpConfig.getConfigEntries().blockBlacklist.isEmpty()) {
-            packet.writeCollection(WallJumpConfig.getConfigEntries().blockBlacklist, FriendlyByteBuf::writeUtf);
-        }
+        packet.writeCollection(WallJumpConfig.getConfigEntries().blockBlacklist, FriendlyByteBuf::writeUtf);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableElytraWallCling);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableInvisibleWallCling);
         packet.writeBoolean(WallJumpConfig.getConfigEntries().enableClassicWallCling);

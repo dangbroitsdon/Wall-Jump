@@ -37,9 +37,7 @@ public class WallJumpServerReceivers {
     public static void registerClientReceivers() {
         NetworkManager.registerReceiver(NetworkManager.s2c(), SERVER_CONFIG_PACKET_ID, (buf, context) -> {
             WallJumpConfig.getConfigEntries().enableWallJump = buf.readBoolean();
-            if(!buf.readList(FriendlyByteBuf::readUtf).isEmpty()) {
-                WallJumpConfig.getConfigEntries().blockBlacklist = buf.readList(FriendlyByteBuf::readUtf);
-            }
+            WallJumpConfig.getConfigEntries().blockBlacklist = buf.readList(FriendlyByteBuf::readUtf);
             WallJumpConfig.getConfigEntries().enableElytraWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableInvisibleWallCling = buf.readBoolean();
             WallJumpConfig.getConfigEntries().enableClassicWallCling = buf.readBoolean();
