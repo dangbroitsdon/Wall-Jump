@@ -1,14 +1,12 @@
 package genandnic.walljump.logic;
 
-import genandnic.walljump.config.WallJumpConfig;
-import genandnic.walljump.registry.WallJumpReceiverRegistry;
-import genandnic.walljump.util.IWallJumpAccessor;
+import genandnic.walljump.util.IWallJumpHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
-public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
+public class DoubleJumpLogic extends Logic {
     private static int jumpCount = 0;
     private static boolean jumpKey = false;
 
@@ -34,7 +32,7 @@ public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
                 || pl.isPassenger()
                 || pl.getAbilities().flying
         ) {
-            jumpCount = IWallJumpAccessor.getJumpCount();
+            jumpCount = IWallJumpHelper.getJumpCount();
         }
 
         else if(pl.input.jumping)
@@ -49,7 +47,6 @@ public class DoubleJumpLogic extends Logic implements IWallJumpAccessor {
 
                     jumpCount--;
 
-                    WallJumpReceiverRegistry.sendFallDistanceMessage(pl.fallDistance);
                     pl.resetFallDistance();
             }
             jumpKey = true;

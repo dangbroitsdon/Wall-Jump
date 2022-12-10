@@ -47,9 +47,6 @@ public class WallJumpConfigEntries implements ConfigData {
     @Comment("Ticks wall clinged before starting wall slide.")
     public int delayWallClingSlide = 35;
 
-    @Comment("Exhaustion gained per wall jump.")
-    public double exhaustionWallJump = 0.8;
-
     @Comment("Allows you to jump in mid-air")
     public boolean enableDoubleJump = true;
 
@@ -65,11 +62,6 @@ public class WallJumpConfigEntries implements ConfigData {
     @ConfigEntry.Gui.RequiresRestart
     public int countDoubleJump = 1;
 
-    @Comment("Exhaustion gained per jump of doublejump.")
-    public double exhaustionDoubleJump = 1.2;
-
-    @Comment("Multiplier for Exhaustion gained per jump of doublejump (ONLY IF YOU WANNA BE FREAKY).")
-    public double exhaustionDoubleJumpMultiplier = 1;
     @Comment("Play a rush of wind as you fall to your doom.")
     public boolean playFallingSound = true;
 
@@ -92,4 +84,7 @@ public class WallJumpConfigEntries implements ConfigData {
 
     @Comment("Walk up steps even while airborne, also jump over fences.")
     public boolean enableStepAssist = true;
+
+    @Comment("Alternative way of Wall-Jumping using Spacebar which requires Pressing Space while Clinged. (might be wonky on anything but Space)")
+    public boolean spaceWallJumpAlt = true;
 }

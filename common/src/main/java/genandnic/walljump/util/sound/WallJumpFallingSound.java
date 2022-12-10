@@ -1,4 +1,4 @@
-package genandnic.walljump.util;
+package genandnic.walljump.util.sound;
 
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.sounds.AbstractTickableSoundInstance;
