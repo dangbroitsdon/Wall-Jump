@@ -48,7 +48,7 @@ public class WallJumpLogic extends Logic {
         IWallJumpHelper.updateWalls();
 
         if(WallJumpConfig.getConfigEntries().enableClassicWallCling) {
-            ticksKeyDown = pl.input.shiftKeyDown ? ++ticksKeyDown : 0;
+            ticksKeyDown = pl.input.shiftKeyDown ? ticksKeyDown + 1: 0;
         } else {
             ticksKeyDown = WallJumpKeyMappings.toggleWallJump ? ++ticksKeyDown : 0;
         }

@@ -31,7 +31,7 @@ public interface IWallJumpHelper {
         LocalPlayer pl = Minecraft.getInstance().player;
         assert pl != null;
 
-        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? pl.input.shiftKeyDown : !WallJumpKeyMappings.toggleWallJump;
+        return WallJumpConfig.getConfigEntries().enableClassicWallCling ? !pl.input.shiftKeyDown : !WallJumpKeyMappings.toggleWallJump;
     }
 
     static boolean getWallJumpEligibility() {
