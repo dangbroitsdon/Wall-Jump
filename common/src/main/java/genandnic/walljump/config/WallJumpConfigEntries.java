@@ -86,5 +86,5 @@ public class WallJumpConfigEntries implements ConfigData {
     public boolean enableStepAssist = true;
 
     @Comment("Alternative way of Wall-Jumping using Spacebar which requires Pressing Space while Clinged. (might be wonky on anything but Space)")
-    public boolean spaceWallJumpAlt = true;
+    public boolean spaceWallJumpAlt = false;
 }
