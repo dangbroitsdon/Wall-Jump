@@ -19,7 +19,7 @@ public class SpeedBoostLogic extends Logic {
 
         int jumpBoostLevel = 0;
 
-        if(!WallJumpConfig.isModUsable(pl.getLevel()) || (WallJumpConfig.getConfigEntries().sprintSpeedBoost == 0.0 && WallJumpConfig.getConfigEntries().elytraSpeedBoost == 0.0)) return;
+        if(!WallJumpConfig.isModUsable(pl.getLevel())) return;
 
         if(jumpBoostEffect != null)
             jumpBoostLevel = jumpBoostEffect.getAmplifier() + 1;
