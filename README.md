@@ -1,5 +1,3 @@
-# Wall-Jump Unofficial
-
 # Wall-Jump Unofficial is officially DEAD!
 
-look to issue #44 for why
+look to [here](https://github.com/dangbroitsdon/Wall-Jump-Unofficial/issues/44) for why
